@@ -20,7 +20,8 @@ class KeyboardViewController: UIInputViewController {
     var letHotButton: UIButton!
     var quoteHotButton: UIButton!
     var codeHotButton: UIButton!
-
+    var horizHotStackView: UIStackView!
+    
     override func updateViewConstraints() {
         super.updateViewConstraints()
         
@@ -29,6 +30,7 @@ class KeyboardViewController: UIInputViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        horizHotStackView = UIStackView()
         
         // Perform custom UI setup here
         self.nextKeyboardButton = UIButton(type: .system)
@@ -55,26 +57,22 @@ class KeyboardViewController: UIInputViewController {
         self.bracesHotButton.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         self.bracesHotButton.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
 
-        self.bracketsHotButton = UIButton(type: .system)
-        self.bracketsHotButton.setTitle(NSLocalizedString("[ ]", comment: "Insert Left and Right Brackets place cursor in the middle"), for: [])
-        self.bracketsHotButton.sizeToFit()
-        self.bracketsHotButton.translatesAutoresizingMaskIntoConstraints = false
-        self.bracketsHotButton.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
-        self.view.addSubview(self.bracketsHotButton)
-        //self.bracketsHotButton.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        self.bracketsHotButton.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        self.bracketsHotButton = makeHotButton(title: "[ ]", desc: "Insert Left and Right Brackets place cursor in the middle")
+        
 
     }
     
-    func makeHotButton(button: UIButton, title: String, desc: String){
-        
+    func makeHotButton(title: String, desc: String) -> UIButton{
+        let button = UIButton(type: .system)
         button.setTitle(NSLocalizedString(title, comment: desc), for: [])
         button.sizeToFit()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
         self.view.addSubview(button)
-        button.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        button.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         button.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        
+        return button
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
