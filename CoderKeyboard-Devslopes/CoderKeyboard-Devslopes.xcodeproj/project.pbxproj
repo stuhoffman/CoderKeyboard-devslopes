@@ -12,7 +12,33 @@
 		20E5DC4A1F86707F00C1BC78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20E5DC481F86707F00C1BC78 /* Main.storyboard */; };
 		20E5DC4C1F86707F00C1BC78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20E5DC4B1F86707F00C1BC78 /* Assets.xcassets */; };
 		20E5DC4F1F86707F00C1BC78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20E5DC4D1F86707F00C1BC78 /* LaunchScreen.storyboard */; };
+		20E5DC5D1F867AE500C1BC78 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E5DC5C1F867AE500C1BC78 /* KeyboardViewController.swift */; };
+		20E5DC611F867AE500C1BC78 /* CoderKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 20E5DC5A1F867AE500C1BC78 /* CoderKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		20E5DC5F1F867AE500C1BC78 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20E5DC391F86707F00C1BC78 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 20E5DC591F867AE500C1BC78;
+			remoteInfo = CoderKeyboard;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		20E5DC651F867AE500C1BC78 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				20E5DC611F867AE500C1BC78 /* CoderKeyboard.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		20E5DC411F86707F00C1BC78 /* CoderKeyboard-Devslopes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoderKeyboard-Devslopes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,10 +48,20 @@
 		20E5DC4B1F86707F00C1BC78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		20E5DC4E1F86707F00C1BC78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		20E5DC501F86707F00C1BC78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20E5DC5A1F867AE500C1BC78 /* CoderKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CoderKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		20E5DC5C1F867AE500C1BC78 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		20E5DC5E1F867AE500C1BC78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		20E5DC3E1F86707F00C1BC78 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20E5DC571F867AE500C1BC78 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -39,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				20E5DC431F86707F00C1BC78 /* CoderKeyboard-Devslopes */,
+				20E5DC5B1F867AE500C1BC78 /* CoderKeyboard */,
 				20E5DC421F86707F00C1BC78 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -47,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				20E5DC411F86707F00C1BC78 /* CoderKeyboard-Devslopes.app */,
+				20E5DC5A1F867AE500C1BC78 /* CoderKeyboard.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,6 +102,15 @@
 			path = "CoderKeyboard-Devslopes";
 			sourceTree = "<group>";
 		};
+		20E5DC5B1F867AE500C1BC78 /* CoderKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				20E5DC5C1F867AE500C1BC78 /* KeyboardViewController.swift */,
+				20E5DC5E1F867AE500C1BC78 /* Info.plist */,
+			);
+			path = CoderKeyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,15 +121,34 @@
 				20E5DC3D1F86707F00C1BC78 /* Sources */,
 				20E5DC3E1F86707F00C1BC78 /* Frameworks */,
 				20E5DC3F1F86707F00C1BC78 /* Resources */,
+				20E5DC651F867AE500C1BC78 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				20E5DC601F867AE500C1BC78 /* PBXTargetDependency */,
 			);
 			name = "CoderKeyboard-Devslopes";
 			productName = "CoderKeyboard-Devslopes";
 			productReference = 20E5DC411F86707F00C1BC78 /* CoderKeyboard-Devslopes.app */;
 			productType = "com.apple.product-type.application";
+		};
+		20E5DC591F867AE500C1BC78 /* CoderKeyboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20E5DC621F867AE500C1BC78 /* Build configuration list for PBXNativeTarget "CoderKeyboard" */;
+			buildPhases = (
+				20E5DC561F867AE500C1BC78 /* Sources */,
+				20E5DC571F867AE500C1BC78 /* Frameworks */,
+				20E5DC581F867AE500C1BC78 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoderKeyboard;
+			productName = CoderKeyboard;
+			productReference = 20E5DC5A1F867AE500C1BC78 /* CoderKeyboard.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -95,6 +161,10 @@
 				ORGANIZATIONNAME = "Stuart Hoffman";
 				TargetAttributes = {
 					20E5DC401F86707F00C1BC78 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					20E5DC591F867AE500C1BC78 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
 					};
@@ -114,6 +184,7 @@
 			projectRoot = "";
 			targets = (
 				20E5DC401F86707F00C1BC78 /* CoderKeyboard-Devslopes */,
+				20E5DC591F867AE500C1BC78 /* CoderKeyboard */,
 			);
 		};
 /* End PBXProject section */
@@ -129,6 +200,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		20E5DC581F867AE500C1BC78 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -141,7 +219,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		20E5DC561F867AE500C1BC78 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20E5DC5D1F867AE500C1BC78 /* KeyboardViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		20E5DC601F867AE500C1BC78 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 20E5DC591F867AE500C1BC78 /* CoderKeyboard */;
+			targetProxy = 20E5DC5F1F867AE500C1BC78 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		20E5DC481F86707F00C1BC78 /* Main.storyboard */ = {
@@ -273,6 +367,7 @@
 		20E5DC541F86707F00C1BC78 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QYKF54APFV;
@@ -288,6 +383,7 @@
 		20E5DC551F86707F00C1BC78 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QYKF54APFV;
@@ -295,6 +391,36 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hoffman.CoderKeyboard-Devslopes";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		20E5DC631F867AE500C1BC78 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QYKF54APFV;
+				INFOPLIST_FILE = CoderKeyboard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hoffman.CoderKeyboard-Devslopes.CoderKeyboard";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		20E5DC641F867AE500C1BC78 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QYKF54APFV;
+				INFOPLIST_FILE = CoderKeyboard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hoffman.CoderKeyboard-Devslopes.CoderKeyboard";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -310,7 +436,7 @@
 				20E5DC521F86707F00C1BC78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		20E5DC531F86707F00C1BC78 /* Build configuration list for PBXNativeTarget "CoderKeyboard-Devslopes" */ = {
 			isa = XCConfigurationList;
@@ -319,7 +445,16 @@
 				20E5DC551F86707F00C1BC78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
+		};
+		20E5DC621F867AE500C1BC78 /* Build configuration list for PBXNativeTarget "CoderKeyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20E5DC631F867AE500C1BC78 /* Debug */,
+				20E5DC641F867AE500C1BC78 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
