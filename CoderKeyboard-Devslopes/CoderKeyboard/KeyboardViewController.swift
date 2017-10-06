@@ -55,18 +55,29 @@ class KeyboardViewController: UIInputViewController {
         self.quoteHotButton = makeHotButton(title: "\" \"", desc: "Insert left and right quotes place cursor in the middle")
         self.codeHotButton = makeHotButton(title: "code", desc: "Insert code keyword place cursor after the word code")
         
-        //each is added to the arrayOfHotButtons via the function.
+
+
         horizHotStackView = UIStackView(arrangedSubviews: arrayOfHotButtons)
+
         horizHotStackView.axis = .horizontal
         horizHotStackView.distribution = .fillEqually
         horizHotStackView.alignment = .fill
         horizHotStackView.spacing = 10
         horizHotStackView.translatesAutoresizingMaskIntoConstraints = false
+        horizHotStackView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
+
         self.view.addSubview(horizHotStackView)
 
+        /*Enable later to set background color set to back.
+         let colorView = UIView(frame: horizHotStackView.bounds)
+         colorView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+         colorView.backgroundColor = UIColor.green
+         horizHotStackView.addSubview(colorView)
 
+ */
     }
     
+    //makeHotButton is meant to create a new UIButton for our HotButtons array then add them to the array
     func makeHotButton(title: String, desc: String) -> UIButton{
         let button = UIButton(type: .system)
         button.setTitle(NSLocalizedString(title, comment: desc), for: [])
