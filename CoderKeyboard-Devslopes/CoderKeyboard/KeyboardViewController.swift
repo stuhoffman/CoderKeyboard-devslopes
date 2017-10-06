@@ -9,9 +9,18 @@
 import UIKit
 
 class KeyboardViewController: UIInputViewController {
-
+//MARK =====> OUTLETS
     @IBOutlet var nextKeyboardButton: UIButton!
     
+    
+    //MARK ====> Vars
+    var bracesHotButton: UIButton!
+    var bracketsHotButton: UIButton!
+    var varHotButton: UIButton!
+    var letHotButton: UIButton!
+    var quoteHotButton: UIButton!
+    var codeHotButton: UIButton!
+
     override func updateViewConstraints() {
         super.updateViewConstraints()
         
@@ -34,8 +43,39 @@ class KeyboardViewController: UIInputViewController {
         
         self.nextKeyboardButton.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         self.nextKeyboardButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        
+        
+        //MARK Our buttons
+        self.bracesHotButton = UIButton(type: .system)
+        self.bracesHotButton.setTitle(NSLocalizedString("{ }", comment: "Insert Left and Right Braces place cursor in the middle"), for: [])
+        self.bracesHotButton.sizeToFit()
+        self.bracesHotButton.translatesAutoresizingMaskIntoConstraints = false
+        self.bracesHotButton.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
+        self.view.addSubview(self.bracesHotButton)
+        self.bracesHotButton.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        self.bracesHotButton.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+
+        self.bracketsHotButton = UIButton(type: .system)
+        self.bracketsHotButton.setTitle(NSLocalizedString("[ ]", comment: "Insert Left and Right Brackets place cursor in the middle"), for: [])
+        self.bracketsHotButton.sizeToFit()
+        self.bracketsHotButton.translatesAutoresizingMaskIntoConstraints = false
+        self.bracketsHotButton.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
+        self.view.addSubview(self.bracketsHotButton)
+        //self.bracketsHotButton.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        self.bracketsHotButton.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+
     }
     
+    func makeHotButton(button: UIButton, title: String, desc: String){
+        
+        button.setTitle(NSLocalizedString(title, comment: desc), for: [])
+        button.sizeToFit()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
+        self.view.addSubview(button)
+        button.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        button.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated
@@ -56,6 +96,8 @@ class KeyboardViewController: UIInputViewController {
             textColor = UIColor.black
         }
         self.nextKeyboardButton.setTitleColor(textColor, for: [])
+        self.bracesHotButton.setTitleColor(textColor, for:[])
+        self.bracketsHotButton.setTitleColor(textColor, for:[])
     }
 
 }
