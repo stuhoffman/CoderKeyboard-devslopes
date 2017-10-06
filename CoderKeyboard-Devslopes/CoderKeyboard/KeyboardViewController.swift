@@ -21,7 +21,8 @@ class KeyboardViewController: UIInputViewController {
     var quoteHotButton: UIButton!
     var codeHotButton: UIButton!
     var horizHotStackView: UIStackView!
-    
+    var arrayOfHotButtons: [UIButton] = []
+
     override func updateViewConstraints() {
         super.updateViewConstraints()
         
@@ -30,7 +31,6 @@ class KeyboardViewController: UIInputViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        horizHotStackView = UIStackView()
         
         // Perform custom UI setup here
         self.nextKeyboardButton = UIButton(type: .system)
@@ -48,17 +48,22 @@ class KeyboardViewController: UIInputViewController {
         
         
         //MARK Our buttons
-        self.bracesHotButton = UIButton(type: .system)
-        self.bracesHotButton.setTitle(NSLocalizedString("{ }", comment: "Insert Left and Right Braces place cursor in the middle"), for: [])
-        self.bracesHotButton.sizeToFit()
-        self.bracesHotButton.translatesAutoresizingMaskIntoConstraints = false
-        self.bracesHotButton.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
-        self.view.addSubview(self.bracesHotButton)
-        self.bracesHotButton.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        self.bracesHotButton.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-
-        self.bracketsHotButton = makeHotButton(title: "[ ]", desc: "Insert Left and Right Brackets place cursor in the middle")
+        self.bracesHotButton = makeHotButton(title: "{ }", desc: "Insert left and right Braces place cursor in the middle")
+        self.bracketsHotButton = makeHotButton(title: "[ ]", desc: "Insert left and right Brackets place cursor in the middle")
+        self.varHotButton = makeHotButton(title: "var", desc: "Insert var keyword place cursor after the word var")
+        self.letHotButton = makeHotButton(title: "let", desc: "Insert let keyword place cursor after the word let")
+        self.quoteHotButton = makeHotButton(title: "\" \"", desc: "Insert left and right quotes place cursor in the middle")
+        self.codeHotButton = makeHotButton(title: "code", desc: "Insert code keyword place cursor after the word code")
         
+        //each is added to the arrayOfHotButtons via the function.
+        horizHotStackView = UIStackView(arrangedSubviews: arrayOfHotButtons)
+        horizHotStackView.axis = .horizontal
+        horizHotStackView.distribution = .fillEqually
+        horizHotStackView.alignment = .fill
+        horizHotStackView.spacing = 10
+        horizHotStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(horizHotStackView)
+
 
     }
     
@@ -69,9 +74,7 @@ class KeyboardViewController: UIInputViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
         self.view.addSubview(button)
-        button.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        button.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        
+        arrayOfHotButtons += [button]
         return button
     }
     override func didReceiveMemoryWarning() {
