@@ -11,7 +11,7 @@ import UIKit
 class KeyboardViewController: UIInputViewController {
 //MARK =====> OUTLETS
     @IBOutlet var nextKeyboardButton: UIButton!
-    
+    //@IBOutlet var bracesHotButton: UIButton!
     
     //MARK ====> Vars
     var bracesHotButton: UIButton!
@@ -83,10 +83,16 @@ class KeyboardViewController: UIInputViewController {
         button.setTitle(NSLocalizedString(title, comment: desc), for: [])
         button.sizeToFit()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
+        //button.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
         self.view.addSubview(button)
         arrayOfHotButtons += [button]
+        button.tag = arrayOfHotButtons.count
+        button.addTarget(self, action: #selector(action), for: UIControlEvents.touchUpInside)
         return button
+    }
+    
+    @objc func action(sender: UIButton!) {
+        print("Button \(String(describing: sender.currentTitle)) was clicked with tag = \(sender.tag)")
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
