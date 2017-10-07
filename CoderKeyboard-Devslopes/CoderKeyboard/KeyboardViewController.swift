@@ -68,7 +68,7 @@ class KeyboardViewController: UIInputViewController {
 
         self.view.addSubview(horizHotStackView)
 
-        //Enable later to set background color set to back.
+        //Setting Stack background color
          let colorView = UIView(frame: horizHotStackView.bounds)
          colorView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         let viewBgColor: UIColor = UIColor(red: 63/255, green: 64/255, blue: 68/255, alpha: 0.5)
@@ -83,12 +83,17 @@ class KeyboardViewController: UIInputViewController {
     //makeHotButton is meant to create a new UIButton for our HotButtons array then add them to the array
     func makeHotButton(title: String, desc: String) -> UIButton{
         let button = UIButton(type: .system)
+        let buttonBgColor: UIColor = UIColor(red: 41/255, green: 43/255, blue: 53/255, alpha: 0.5)
         button.setTitle(NSLocalizedString(title, comment: desc), for: [])
         button.sizeToFit()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tag = arrayOfHotButtons.count
         button.addTarget(self, action: #selector(action), for: UIControlEvents.touchUpInside)
         button.layer.zPosition = 2
+        button.layer.cornerRadius = 4
+        button.layer.borderWidth = 1
+        //button.layer.borderColor = UIColor.cyan.cgColor
+        button.layer.backgroundColor = buttonBgColor.cgColor
         let textColor: UIColor = UIColor.white
         button.setTitleColor(textColor, for:[])
         self.view.addSubview(button)
