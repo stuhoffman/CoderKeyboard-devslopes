@@ -68,14 +68,17 @@ class KeyboardViewController: UIInputViewController {
 
         self.view.addSubview(horizHotStackView)
 
-        /*Enable later to set background color set to back.
+        //Enable later to set background color set to back.
          let colorView = UIView(frame: horizHotStackView.bounds)
          colorView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-         colorView.backgroundColor = UIColor.green
+        let viewBgColor: UIColor = UIColor(red: 63/255, green: 64/255, blue: 68/255, alpha: 0.5)
+         colorView.backgroundColor = viewBgColor
          horizHotStackView.addSubview(colorView)
-
- */
+        
+        colorView.layer.zPosition = 1
+        
     }
+    
     
     //makeHotButton is meant to create a new UIButton for our HotButtons array then add them to the array
     func makeHotButton(title: String, desc: String) -> UIButton{
@@ -83,11 +86,13 @@ class KeyboardViewController: UIInputViewController {
         button.setTitle(NSLocalizedString(title, comment: desc), for: [])
         button.sizeToFit()
         button.translatesAutoresizingMaskIntoConstraints = false
-        //button.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
-        self.view.addSubview(button)
-        arrayOfHotButtons += [button]
         button.tag = arrayOfHotButtons.count
         button.addTarget(self, action: #selector(action), for: UIControlEvents.touchUpInside)
+        button.layer.zPosition = 2
+        let textColor: UIColor = UIColor.white
+        button.setTitleColor(textColor, for:[])
+        self.view.addSubview(button)
+        arrayOfHotButtons += [button]
         return button
     }
     
@@ -114,8 +119,7 @@ class KeyboardViewController: UIInputViewController {
             textColor = UIColor.black
         }
         self.nextKeyboardButton.setTitleColor(textColor, for: [])
-        self.bracesHotButton.setTitleColor(textColor, for:[])
-        self.bracketsHotButton.setTitleColor(textColor, for:[])
+        
     }
 
 }
