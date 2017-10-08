@@ -22,7 +22,9 @@ class KeyboardViewController: UIInputViewController {
     var codeHotButton: UIButton!
     var horizHotStackView: UIStackView!
     var arrayOfHotButtons: [UIButton] = []
-
+    var backButton: UIButton!
+    var actionLabel: UILabel!
+    
     override func updateViewConstraints() {
         super.updateViewConstraints()
         
@@ -30,6 +32,19 @@ class KeyboardViewController: UIInputViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        let textColor: UIColor = UIColor.white
+        let viewBgColor: UIColor = UIColor(red: 63/255, green: 64/255, blue: 68/255, alpha: 0.5)
+        
+        actionLabel = UILabel()
+        actionLabel.text = "RECENT"
+        actionLabel.textColor = textColor
+        actionLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(actionLabel)
+        actionLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10.0).isActive = true
+        actionLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 10.0).isActive = true
+        
+        self.view.backgroundColor = viewBgColor
+        
         //MARK Our buttons
         self.bracesHotButton = makeHotButton(title: "{ }", desc: "Insert left and right Braces place cursor in the middle")
         self.bracketsHotButton = makeHotButton(title: "[ ]", desc: "Insert left and right Brackets place cursor in the middle")
@@ -51,13 +66,14 @@ class KeyboardViewController: UIInputViewController {
         //Setting Stack background color
         let colorView = UIView(frame: horizHotStackView.bounds)
         colorView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        let viewBgColor: UIColor = UIColor(red: 63/255, green: 64/255, blue: 68/255, alpha: 0.5)
+        
         colorView.backgroundColor = viewBgColor
         colorView.layer.zPosition = 1
         
-        horizHotStackView.addSubview(colorView)
-        horizHotStackView.sendSubview(toBack: colorView)
+        //horizHotStackView.addSubview(colorView)
+        //horizHotStackView.sendSubview(toBack: colorView)
 
+        horizHotStackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 40.0).isActive = true
         horizHotStackView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10.0).isActive = true
         horizHotStackView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10.0).isActive = true
     }
@@ -67,7 +83,7 @@ class KeyboardViewController: UIInputViewController {
         // Perform custom UI setup here DEFAULT SECTION
         self.nextKeyboardButton = UIButton(type: .system)
         
-        self.nextKeyboardButton.setTitle(NSLocalizedString("Next Keyboard", comment: "Title for 'Next Keyboard' button"), for: [])
+        self.nextKeyboardButton.setTitle(NSLocalizedString("Back", comment: "Title for 'Next Keyboard' button"), for: [])
         self.nextKeyboardButton.sizeToFit()
         self.nextKeyboardButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -78,8 +94,6 @@ class KeyboardViewController: UIInputViewController {
         self.nextKeyboardButton.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         self.nextKeyboardButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         
-
- 
     }
     
     
@@ -97,11 +111,15 @@ class KeyboardViewController: UIInputViewController {
         button.layer.borderWidth = 1
         //button.layer.borderColor = UIColor.cyan.cgColor
         button.layer.backgroundColor = buttonBgColor.cgColor
-        let textColor: UIColor = UIColor.white
+        var textColor: UIColor = UIColor.white //default
+        if title == "var" || title == "let" {
+            textColor = UIColor(red: 240/255, green: 53/255, blue: 253/255, alpha: 0.5)
+        } else if title == "\" \"" {
+            textColor = UIColor(red: 255/255, green: 1/255, blue: 1/255, alpha: 0.5)
+        }
+        
         button.setTitleColor(textColor, for:[])
-        //self.view.addSubview(button)
         arrayOfHotButtons += [button]
-        //horizHotStackView.addArrangedSubview(button)
         return button
     }
     
