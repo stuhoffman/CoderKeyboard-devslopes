@@ -41,6 +41,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		201E62351F89C93300950112 /* CoderKeyboard-Devslopes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CoderKeyboard-Devslopes.entitlements"; sourceTree = "<group>"; };
+		201E62361F89C99A00950112 /* CoderKeyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoderKeyboard.entitlements; sourceTree = "<group>"; };
 		20E5DC411F86707F00C1BC78 /* CoderKeyboard-Devslopes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoderKeyboard-Devslopes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20E5DC441F86707F00C1BC78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20E5DC461F86707F00C1BC78 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 		20E5DC431F86707F00C1BC78 /* CoderKeyboard-Devslopes */ = {
 			isa = PBXGroup;
 			children = (
+				201E62351F89C93300950112 /* CoderKeyboard-Devslopes.entitlements */,
 				20E5DC441F86707F00C1BC78 /* AppDelegate.swift */,
 				20E5DC461F86707F00C1BC78 /* ViewController.swift */,
 				20E5DC481F86707F00C1BC78 /* Main.storyboard */,
@@ -105,6 +108,7 @@
 		20E5DC5B1F867AE500C1BC78 /* CoderKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				201E62361F89C99A00950112 /* CoderKeyboard.entitlements */,
 				20E5DC5C1F867AE500C1BC78 /* KeyboardViewController.swift */,
 				20E5DC5E1F867AE500C1BC78 /* Info.plist */,
 			);
@@ -163,10 +167,20 @@
 					20E5DC401F86707F00C1BC78 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					20E5DC591F867AE500C1BC78 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -369,6 +383,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "CoderKeyboard-Devslopes/CoderKeyboard-Devslopes.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QYKF54APFV;
 				INFOPLIST_FILE = "CoderKeyboard-Devslopes/Info.plist";
@@ -385,6 +400,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "CoderKeyboard-Devslopes/CoderKeyboard-Devslopes.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QYKF54APFV;
 				INFOPLIST_FILE = "CoderKeyboard-Devslopes/Info.plist";
@@ -399,10 +415,12 @@
 		20E5DC631F867AE500C1BC78 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CoderKeyboard/CoderKeyboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QYKF54APFV;
 				INFOPLIST_FILE = CoderKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hoffman.CoderKeyboard-Devslopes.CoderKeyboard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -414,10 +432,12 @@
 		20E5DC641F867AE500C1BC78 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CoderKeyboard/CoderKeyboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QYKF54APFV;
 				INFOPLIST_FILE = CoderKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hoffman.CoderKeyboard-Devslopes.CoderKeyboard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

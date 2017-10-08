@@ -28,11 +28,43 @@ class KeyboardViewController: UIInputViewController {
         
         // Add custom view sizing constraints here
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        //MARK Our buttons
+        self.bracesHotButton = makeHotButton(title: "{ }", desc: "Insert left and right Braces place cursor in the middle")
+        self.bracketsHotButton = makeHotButton(title: "[ ]", desc: "Insert left and right Brackets place cursor in the middle")
+        self.varHotButton = makeHotButton(title: "var", desc: "Insert var keyword place cursor after the word var")
+        self.letHotButton = makeHotButton(title: "let", desc: "Insert let keyword place cursor after the word let")
+        self.quoteHotButton = makeHotButton(title: "\" \"", desc: "Insert left and right quotes place cursor in the middle")
+        self.codeHotButton = makeHotButton(title: "code", desc: "Insert code keyword place cursor after the word code")
+        
+        //MARK ====> THE STACK VIEW
+        horizHotStackView = UIStackView(arrangedSubviews: arrayOfHotButtons)
+        horizHotStackView.axis = .horizontal
+        horizHotStackView.distribution = .fillEqually
+        horizHotStackView.alignment = .fill
+        horizHotStackView.spacing = 10
+        horizHotStackView.translatesAutoresizingMaskIntoConstraints = false
+        horizHotStackView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
+        self.view.addSubview(horizHotStackView)
+        
+        //Setting Stack background color
+        let colorView = UIView(frame: horizHotStackView.bounds)
+        colorView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        let viewBgColor: UIColor = UIColor(red: 63/255, green: 64/255, blue: 68/255, alpha: 0.5)
+        colorView.backgroundColor = viewBgColor
+        colorView.layer.zPosition = 1
+        
+        horizHotStackView.addSubview(colorView)
+        horizHotStackView.sendSubview(toBack: colorView)
+
+        horizHotStackView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10.0).isActive = true
+        horizHotStackView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10.0).isActive = true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Perform custom UI setup here
+        // Perform custom UI setup here DEFAULT SECTION
         self.nextKeyboardButton = UIButton(type: .system)
         
         self.nextKeyboardButton.setTitle(NSLocalizedString("Next Keyboard", comment: "Title for 'Next Keyboard' button"), for: [])
@@ -46,37 +78,8 @@ class KeyboardViewController: UIInputViewController {
         self.nextKeyboardButton.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         self.nextKeyboardButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         
-        
-        //MARK Our buttons
-        self.bracesHotButton = makeHotButton(title: "{ }", desc: "Insert left and right Braces place cursor in the middle")
-        self.bracketsHotButton = makeHotButton(title: "[ ]", desc: "Insert left and right Brackets place cursor in the middle")
-        self.varHotButton = makeHotButton(title: "var", desc: "Insert var keyword place cursor after the word var")
-        self.letHotButton = makeHotButton(title: "let", desc: "Insert let keyword place cursor after the word let")
-        self.quoteHotButton = makeHotButton(title: "\" \"", desc: "Insert left and right quotes place cursor in the middle")
-        self.codeHotButton = makeHotButton(title: "code", desc: "Insert code keyword place cursor after the word code")
-        
 
-
-        horizHotStackView = UIStackView(arrangedSubviews: arrayOfHotButtons)
-
-        horizHotStackView.axis = .horizontal
-        horizHotStackView.distribution = .fillEqually
-        horizHotStackView.alignment = .fill
-        horizHotStackView.spacing = 10
-        horizHotStackView.translatesAutoresizingMaskIntoConstraints = false
-        horizHotStackView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
-
-        self.view.addSubview(horizHotStackView)
-
-        //Setting Stack background color
-         let colorView = UIView(frame: horizHotStackView.bounds)
-         colorView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        let viewBgColor: UIColor = UIColor(red: 63/255, green: 64/255, blue: 68/255, alpha: 0.5)
-         colorView.backgroundColor = viewBgColor
-         horizHotStackView.addSubview(colorView)
-        
-        colorView.layer.zPosition = 1
-        
+ 
     }
     
     
@@ -96,8 +99,9 @@ class KeyboardViewController: UIInputViewController {
         button.layer.backgroundColor = buttonBgColor.cgColor
         let textColor: UIColor = UIColor.white
         button.setTitleColor(textColor, for:[])
-        self.view.addSubview(button)
+        //self.view.addSubview(button)
         arrayOfHotButtons += [button]
+        //horizHotStackView.addArrangedSubview(button)
         return button
     }
     
