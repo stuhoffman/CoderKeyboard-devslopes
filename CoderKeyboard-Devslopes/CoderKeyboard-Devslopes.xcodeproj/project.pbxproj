@@ -43,6 +43,7 @@
 /* Begin PBXFileReference section */
 		201E62351F89C93300950112 /* CoderKeyboard-Devslopes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CoderKeyboard-Devslopes.entitlements"; sourceTree = "<group>"; };
 		201E62361F89C99A00950112 /* CoderKeyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoderKeyboard.entitlements; sourceTree = "<group>"; };
+		208BDA341F8A066900E326AD /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
 		20E5DC411F86707F00C1BC78 /* CoderKeyboard-Devslopes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoderKeyboard-Devslopes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20E5DC441F86707F00C1BC78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20E5DC461F86707F00C1BC78 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -73,9 +74,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		208BDA331F8A063F00E326AD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				208BDA341F8A066900E326AD /* Montserrat-Regular.otf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		20E5DC381F86707F00C1BC78 = {
 			isa = PBXGroup;
 			children = (
+				208BDA331F8A063F00E326AD /* Resources */,
 				20E5DC431F86707F00C1BC78 /* CoderKeyboard-Devslopes */,
 				20E5DC5B1F867AE500C1BC78 /* CoderKeyboard */,
 				20E5DC421F86707F00C1BC78 /* Products */,

@@ -119,6 +119,7 @@ class KeyboardViewController: UIInputViewController {
         }
         
         button.setTitleColor(textColor, for:[])
+        //button.titleLabel?.font = UIFont(name: "Montserrat", size: 12)!
         arrayOfHotButtons += [button]
         return button
     }
