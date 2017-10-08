@@ -113,9 +113,9 @@ class KeyboardViewController: UIInputViewController {
         button.layer.backgroundColor = buttonBgColor.cgColor
         var textColor: UIColor = UIColor.white //default
         if title == "var" || title == "let" {
-            textColor = UIColor(red: 240/255, green: 53/255, blue: 253/255, alpha: 0.5)
+            textColor = UIColor(red: 240/255, green: 53/255, blue: 253/255, alpha: 1)
         } else if title == "\" \"" {
-            textColor = UIColor(red: 255/255, green: 1/255, blue: 1/255, alpha: 0.5)
+            textColor = UIColor(red: 255/255, green: 1/255, blue: 1/255, alpha: 1)
         }
         
         button.setTitleColor(textColor, for:[])
