@@ -24,7 +24,9 @@ class KeyboardViewController: UIInputViewController {
     var arrayOfHotButtons: [UIButton] = []
     var backButton: UIButton!
     var actionLabel: UILabel!
-    
+    var buttonsTextColor: UIColor = UIColor.white //default
+    var insertBetween: Bool = false //default
+
     override func updateViewConstraints() {
         super.updateViewConstraints()
         
@@ -46,11 +48,11 @@ class KeyboardViewController: UIInputViewController {
         self.view.backgroundColor = viewBgColor
         
         //MARK Our buttons
-        self.bracesHotButton = makeHotButton(title: "{ }", desc: "Insert left and right Braces place cursor in the middle")
-        self.bracketsHotButton = makeHotButton(title: "[ ]", desc: "Insert left and right Brackets place cursor in the middle")
+        self.bracesHotButton = makeHotButton(title: "{}", desc: "Insert left and right Braces place cursor in the middle")
+        self.bracketsHotButton = makeHotButton(title: "[]", desc: "Insert left and right Brackets place cursor in the middle")
         self.varHotButton = makeHotButton(title: "var", desc: "Insert var keyword place cursor after the word var")
         self.letHotButton = makeHotButton(title: "let", desc: "Insert let keyword place cursor after the word let")
-        self.quoteHotButton = makeHotButton(title: "\" \"", desc: "Insert left and right quotes place cursor in the middle")
+        self.quoteHotButton = makeHotButton(title: "\"\"", desc: "Insert left and right quotes place cursor in the middle")
         self.codeHotButton = makeHotButton(title: "code", desc: "Insert code keyword place cursor after the word code")
         
         //MARK ====> THE STACK VIEW
@@ -109,16 +111,19 @@ class KeyboardViewController: UIInputViewController {
         button.layer.zPosition = 2
         button.layer.cornerRadius = 4
         button.layer.borderWidth = 1
-        //button.layer.borderColor = UIColor.cyan.cgColor
         button.layer.backgroundColor = buttonBgColor.cgColor
-        var textColor: UIColor = UIColor.white //default
-        if title == "var" || title == "let" {
-            textColor = UIColor(red: 240/255, green: 53/255, blue: 253/255, alpha: 1)
-        } else if title == "\" \"" {
-            textColor = UIColor(red: 255/255, green: 1/255, blue: 1/255, alpha: 1)
+        switch title {
+        case "var","let":
+            buttonsTextColor = UIColor(red: 240/255, green: 53/255, blue: 253/255, alpha: 1)
+        case "\"\"":
+            buttonsTextColor = UIColor(red: 255/255, green: 1/255, blue: 1/255, alpha: 1)
+        case "{}","[]":
+            buttonsTextColor = UIColor.white
+        default:
+            buttonsTextColor = UIColor.white
         }
         
-        button.setTitleColor(textColor, for:[])
+        button.setTitleColor(buttonsTextColor, for:[])
         //button.titleLabel?.font = UIFont(name: "Montserrat", size: 12)!
         arrayOfHotButtons += [button]
         return button
@@ -127,8 +132,33 @@ class KeyboardViewController: UIInputViewController {
     @objc func action(sender: UIButton) {
         
         if let buttonTitle = sender.title(for: .normal) {
+            switch buttonTitle {
+            case "var","let":
+                buttonsTextColor = UIColor(red: 240/255, green: 53/255, blue: 253/255, alpha: 1)
+                insertBetween = false
+            case "\"\"":
+                buttonsTextColor = UIColor(red: 255/255, green: 1/255, blue: 1/255, alpha: 1)
+                insertBetween = true
+            case "{}","[]":
+                buttonsTextColor = UIColor.white
+                insertBetween = true
+            default:
+                buttonsTextColor = UIColor.white
+                insertBetween = false
+            }
+            
             print("Button \(buttonTitle) was clicked with tag = \(sender.tag)")
-            self.textDocumentProxy.insertText("\(buttonTitle)")
+            if buttonTitle == "code" {
+                self.textDocumentProxy.insertText("<\(buttonTitle)>")
+                self.textDocumentProxy.insertText("</\(buttonTitle)>")
+                self.textDocumentProxy.adjustTextPosition(byCharacterOffset: -7)
+            } else {
+                self.textDocumentProxy.insertText("\(buttonTitle)")
+            }
+
+            if insertBetween {
+                self.textDocumentProxy.adjustTextPosition(byCharacterOffset: -1)
+            }
         }
     }
     override func didReceiveMemoryWarning() {
