@@ -21,15 +21,22 @@ class KeyboardViewController: UIInputViewController {
     var quoteHotButton: UIButton!
     var codeHotButton: UIButton!
     var horizHotStackView: UIStackView!
+    var horizKeyRow1: UIStackView!
+    var horizKeyRow2: UIStackView!
+    var horizKeyRow3: UIStackView!
+    var horizKeyRow4: UIStackView!
     var vertKeyboardStackView: UIStackView!
     var arrayOfHotButtons: [UIButton] = []
     var arrayOfKeysRow1: [UIButton] = []
+    var arrayOfKeysRow2: [UIButton] = []
+    var arrayOfKeysRow3: [UIButton] = []
+    var arrayOfKeysRow4: [UIButton] = []
     var arrayOfKeyboardRows: [UIStackView] = []
     var backButton: UIButton!
     var actionLabel: UILabel!
     var buttonsTextColor: UIColor = UIColor.white //default
     var insertBetween: Bool = false //default
-    var horizKeyRow1: UIStackView!
+    
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -91,19 +98,25 @@ class KeyboardViewController: UIInputViewController {
         horizKeyRow1.spacing = 10
         horizKeyRow1.translatesAutoresizingMaskIntoConstraints = false
         horizKeyRow1.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
-        //self.view.addSubview(horizKeyRow1)
-        //horizKeyRow1.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20.0).isActive = true
-        ///horizKeyRow1.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10.0).isActive = true
-        ///horizKeyRow1.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10.0).isActive = true
-        
         arrayOfKeyboardRows += [horizKeyRow1]
+        
+        horizKeyRow2.axis = .horizontal
+        horizKeyRow2.distribution = .fillEqually
+        horizKeyRow2.alignment = .fill
+        horizKeyRow2.spacing = 10
+        horizKeyRow2.translatesAutoresizingMaskIntoConstraints = false
+        horizKeyRow2.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
+        arrayOfKeyboardRows += [horizKeyRow2]
+
+        
+        //MARK ====> ADD The Vertical Stack to the View and Constrain it to the sides
         vertKeyboardStackView = UIStackView(arrangedSubviews: arrayOfKeyboardRows)
         vertKeyboardStackView.axis = .vertical
         vertKeyboardStackView.distribution = .fillEqually
         vertKeyboardStackView.spacing = 10
         vertKeyboardStackView.translatesAutoresizingMaskIntoConstraints = false
         vertKeyboardStackView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
-        
+
         self.view.addSubview(vertKeyboardStackView)
         vertKeyboardStackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 40.0).isActive = true
         vertKeyboardStackView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10.0).isActive = true
@@ -193,6 +206,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func buildRegularKeyboard() {
+        //MARK ====> ROW 1 of Keyboard
         let keyQ = addRegularKey(title: "q", desc: "q")
         arrayOfKeysRow1 += [keyQ]
         let keyW = addRegularKey(title: "w", desc: "w")
@@ -213,8 +227,29 @@ class KeyboardViewController: UIInputViewController {
         arrayOfKeysRow1 += [keyO]
         let keyP = addRegularKey(title: "p", desc: "p")
         arrayOfKeysRow1 += [keyP]
-        
         horizKeyRow1 = UIStackView(arrangedSubviews: arrayOfKeysRow1)
+        
+        //MARK ====> ROW 1 of Keyboard
+        let keyA = addRegularKey(title: "a", desc: "a")
+        arrayOfKeysRow2 += [keyA]
+        let keyS = addRegularKey(title: "s", desc: "s")
+        arrayOfKeysRow2 += [keyS]
+        let keyD = addRegularKey(title: "d", desc: "d")
+        arrayOfKeysRow2 += [keyD]
+        let keyF = addRegularKey(title: "f", desc: "f")
+        arrayOfKeysRow2 += [keyF]
+        let keyG = addRegularKey(title: "g", desc: "g")
+        arrayOfKeysRow2 += [keyG]
+        let keyH = addRegularKey(title: "h", desc: "h")
+        arrayOfKeysRow2 += [keyH]
+        let keyJ = addRegularKey(title: "j", desc: "j")
+        arrayOfKeysRow2 += [keyJ]
+        let keyK = addRegularKey(title: "k", desc: "k")
+        arrayOfKeysRow2 += [keyK]
+        let keyL = addRegularKey(title: "l", desc: "l")
+        arrayOfKeysRow2 += [keyL]
+        horizKeyRow2 = UIStackView(arrangedSubviews: arrayOfKeysRow2)
+
     }
     
     func addRegularKey(title: String, desc: String) -> UIButton{
