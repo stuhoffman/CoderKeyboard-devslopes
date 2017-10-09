@@ -36,6 +36,7 @@ class KeyboardViewController: UIInputViewController {
     var actionLabel: UILabel!
     var buttonsTextColor: UIColor = UIColor.white //default
     var insertBetween: Bool = false //default
+    var shiftIsOn: Bool = false //default
     
     
     override func updateViewConstraints() {
@@ -132,19 +133,19 @@ class KeyboardViewController: UIInputViewController {
         super.viewDidLoad()
         
         // Perform custom UI setup here DEFAULT SECTION
-        self.nextKeyboardButton = UIButton(type: .system)
-        
-        self.nextKeyboardButton.setTitle(NSLocalizedString("Back", comment: "Title for 'Next Keyboard' button"), for: [])
-        self.nextKeyboardButton.sizeToFit()
-        self.nextKeyboardButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.nextKeyboardButton.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
-        
-        self.view.addSubview(self.nextKeyboardButton)
-        
-        self.nextKeyboardButton.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        self.nextKeyboardButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        
+//        self.nextKeyboardButton = UIButton(type: .system)
+//
+//        self.nextKeyboardButton.setTitle(NSLocalizedString("Back", comment: "Title for 'Next Keyboard' button"), for: [])
+//        self.nextKeyboardButton.sizeToFit()
+//        self.nextKeyboardButton.translatesAutoresizingMaskIntoConstraints = false
+//
+//        self.nextKeyboardButton.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
+//
+//        self.view.addSubview(self.nextKeyboardButton)
+//
+//        self.nextKeyboardButton.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+//        self.nextKeyboardButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+//
     }
     
     
@@ -157,7 +158,7 @@ class KeyboardViewController: UIInputViewController {
         button.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 16)!
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tag = arrayOfHotButtons.count
-        button.addTarget(self, action: #selector(action), for: UIControlEvents.touchUpInside)
+        button.addTarget(self, action: #selector(hotAction), for: UIControlEvents.touchUpInside)
         button.layer.zPosition = 2
         button.layer.cornerRadius = 4
         button.layer.borderWidth = 1
@@ -179,8 +180,8 @@ class KeyboardViewController: UIInputViewController {
         return button
     }
     
-    //MARK: ===> Action Function
-    @objc func action(sender: UIButton) {
+    //MARK: ===> Hot Button Action Function
+    @objc func hotAction(sender: UIButton) {
         
         if let buttonTitle = sender.title(for: .normal) {
             switch buttonTitle {
@@ -212,6 +213,51 @@ class KeyboardViewController: UIInputViewController {
             }
         }
     }
+    
+    
+    //MARK: ===> KeyAction Function
+    @objc func keyAction(sender: UIButton) {
+        var workingTitle = ""
+        if let buttonTitle = sender.title(for: .normal) {
+            var addToText: Bool = true
+            switch buttonTitle {
+            case "shift":
+                addToText = false
+                if shiftIsOn{
+                    shiftIsOn = false
+                    buttonsTextColor = UIColor.white
+                } else {
+                    shiftIsOn = true
+                    buttonsTextColor = UIColor.blue
+                }
+            case "del","return","@":
+                addToText = false
+            case "space":
+                workingTitle = " "
+                self.textDocumentProxy.insertText("\(workingTitle)")
+                addToText = false
+            case "return":
+                workingTitle = "/n"
+                self.textDocumentProxy.insertText("/n")
+                addToText = false
+            default:
+                buttonsTextColor = UIColor.white
+                insertBetween = false
+                shiftIsOn = false
+            }
+            
+            if shiftIsOn {
+                workingTitle = buttonTitle.uppercased()
+            } else {
+                workingTitle = buttonTitle
+            }
+            if addToText {
+                    print("Button \(workingTitle) was clicked with tag = \(sender.tag)")
+                    self.textDocumentProxy.insertText("\(workingTitle)")
+            }
+        }
+    }
+
     
     //MARK: ====> Builing Regular Keyboard
     func buildRegularKeyboard() {
@@ -254,7 +300,11 @@ class KeyboardViewController: UIInputViewController {
         button.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 14)!
         button.translatesAutoresizingMaskIntoConstraints = false
         //button.tag = arrayOfHotButtons.count
-        button.addTarget(self, action: #selector(action), for: UIControlEvents.touchUpInside)
+        if title == "back" {
+            button.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
+        } else {
+            button.addTarget(self, action: #selector(keyAction), for: UIControlEvents.touchUpInside)
+        }
         button.layer.zPosition = 2
         button.layer.cornerRadius = 4
         button.layer.borderWidth = 1
@@ -283,7 +333,7 @@ class KeyboardViewController: UIInputViewController {
         } else {
             textColor = UIColor.black
         }
-        self.nextKeyboardButton.setTitleColor(textColor, for: [])
+        //self.nextKeyboardButton.setTitleColor(textColor, for: [])
         
     }
 
