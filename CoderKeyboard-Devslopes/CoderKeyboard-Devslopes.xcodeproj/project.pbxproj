@@ -14,6 +14,8 @@
 		20E5DC4F1F86707F00C1BC78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20E5DC4D1F86707F00C1BC78 /* LaunchScreen.storyboard */; };
 		20E5DC5D1F867AE500C1BC78 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E5DC5C1F867AE500C1BC78 /* KeyboardViewController.swift */; };
 		20E5DC611F867AE500C1BC78 /* CoderKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 20E5DC5A1F867AE500C1BC78 /* CoderKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		20E612DD1F8B3736006D0EC7 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 208BDA341F8A066900E326AD /* Montserrat-Regular.otf */; };
+		20E612DE1F8B3737006D0EC7 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 208BDA341F8A066900E326AD /* Montserrat-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -221,6 +223,7 @@
 				20E5DC4F1F86707F00C1BC78 /* LaunchScreen.storyboard in Resources */,
 				20E5DC4C1F86707F00C1BC78 /* Assets.xcassets in Resources */,
 				20E5DC4A1F86707F00C1BC78 /* Main.storyboard in Resources */,
+				20E612DD1F8B3736006D0EC7 /* Montserrat-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20E612DE1F8B3737006D0EC7 /* Montserrat-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
