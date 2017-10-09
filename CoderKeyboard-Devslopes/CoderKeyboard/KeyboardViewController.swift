@@ -22,11 +22,13 @@ class KeyboardViewController: UIInputViewController {
     var codeHotButton: UIButton!
     var horizHotStackView: UIStackView!
     var arrayOfHotButtons: [UIButton] = []
+    var arrayOfKeysRow1: [UIButton] = []
     var backButton: UIButton!
     var actionLabel: UILabel!
     var buttonsTextColor: UIColor = UIColor.white //default
     var insertBetween: Bool = false //default
-
+    var horizKeyRow1: UIStackView!
+    
     override func updateViewConstraints() {
         super.updateViewConstraints()
         
@@ -78,6 +80,20 @@ class KeyboardViewController: UIInputViewController {
         horizHotStackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 40.0).isActive = true
         horizHotStackView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10.0).isActive = true
         horizHotStackView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10.0).isActive = true
+        
+        //MARK =====> Making the keyboard ROW 1
+        buildRegularKeyboard()
+        horizKeyRow1.axis = .horizontal
+        horizKeyRow1.distribution = .fillEqually
+        horizKeyRow1.alignment = .fill
+        horizKeyRow1.spacing = 10
+        horizKeyRow1.translatesAutoresizingMaskIntoConstraints = false
+        horizKeyRow1.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
+        self.view.addSubview(horizKeyRow1)
+        //horizKeyRow1.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20.0).isActive = true
+        horizKeyRow1.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10.0).isActive = true
+        horizKeyRow1.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10.0).isActive = true
+
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -161,6 +177,52 @@ class KeyboardViewController: UIInputViewController {
             }
         }
     }
+    
+    func buildRegularKeyboard() {
+        let keyQ = addRegularKey(title: "q", desc: "q")
+        arrayOfKeysRow1 += [keyQ]
+        let keyW = addRegularKey(title: "w", desc: "w")
+        arrayOfKeysRow1 += [keyW]
+        let keyE = addRegularKey(title: "e", desc: "e")
+        arrayOfKeysRow1 += [keyE]
+        let keyR = addRegularKey(title: "r", desc: "r")
+        arrayOfKeysRow1 += [keyR]
+        let keyT = addRegularKey(title: "t", desc: "t")
+        arrayOfKeysRow1 += [keyT]
+        let keyY = addRegularKey(title: "y", desc: "y")
+        arrayOfKeysRow1 += [keyY]
+        let keyU = addRegularKey(title: "u", desc: "u")
+        arrayOfKeysRow1 += [keyU]
+        let keyI = addRegularKey(title: "i", desc: "i")
+        arrayOfKeysRow1 += [keyI]
+        let keyO = addRegularKey(title: "o", desc: "o")
+        arrayOfKeysRow1 += [keyO]
+        let keyP = addRegularKey(title: "p", desc: "p")
+        arrayOfKeysRow1 += [keyP]
+        
+        horizKeyRow1 = UIStackView(arrangedSubviews: arrayOfKeysRow1)
+    }
+    
+    func addRegularKey(title: String, desc: String) -> UIButton{
+        let button = UIButton(type: .system)
+        let buttonBgColor: UIColor = UIColor.gray
+        button.setTitle(NSLocalizedString(title, comment: desc), for: [])
+        button.sizeToFit()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        //button.tag = arrayOfHotButtons.count
+        button.addTarget(self, action: #selector(action), for: UIControlEvents.touchUpInside)
+        button.layer.zPosition = 2
+        button.layer.cornerRadius = 4
+        button.layer.borderWidth = 1
+        button.layer.backgroundColor = buttonBgColor.cgColor
+        
+        button.setTitleColor(buttonsTextColor, for:[])
+        //button.titleLabel?.font = UIFont(name: "Montserrat", size: 12)!
+        //arrayOfHotButtons += [button]
+        return button
+    }
+    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated
