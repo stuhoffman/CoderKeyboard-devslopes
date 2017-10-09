@@ -21,8 +21,10 @@ class KeyboardViewController: UIInputViewController {
     var quoteHotButton: UIButton!
     var codeHotButton: UIButton!
     var horizHotStackView: UIStackView!
+    var vertKeyboardStackView: UIStackView!
     var arrayOfHotButtons: [UIButton] = []
     var arrayOfKeysRow1: [UIButton] = []
+    var arrayOfKeyboardRows: [UIStackView] = []
     var backButton: UIButton!
     var actionLabel: UILabel!
     var buttonsTextColor: UIColor = UIColor.white //default
@@ -65,8 +67,8 @@ class KeyboardViewController: UIInputViewController {
         horizHotStackView.spacing = 10
         horizHotStackView.translatesAutoresizingMaskIntoConstraints = false
         horizHotStackView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
-        self.view.addSubview(horizHotStackView)
-        
+        //self.view.addSubview(horizHotStackView)
+        arrayOfKeyboardRows += [horizHotStackView]
         //Setting Stack background color
         let colorView = UIView(frame: horizHotStackView.bounds)
         colorView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -77,9 +79,9 @@ class KeyboardViewController: UIInputViewController {
         //horizHotStackView.addSubview(colorView)
         //horizHotStackView.sendSubview(toBack: colorView)
 
-        horizHotStackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 40.0).isActive = true
-        horizHotStackView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10.0).isActive = true
-        horizHotStackView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10.0).isActive = true
+        ///horizHotStackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 40.0).isActive = true
+        ///horizHotStackView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10.0).isActive = true
+        ///horizHotStackView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10.0).isActive = true
         
         //MARK =====> Making the keyboard ROW 1
         buildRegularKeyboard()
@@ -89,11 +91,23 @@ class KeyboardViewController: UIInputViewController {
         horizKeyRow1.spacing = 10
         horizKeyRow1.translatesAutoresizingMaskIntoConstraints = false
         horizKeyRow1.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
-        self.view.addSubview(horizKeyRow1)
+        //self.view.addSubview(horizKeyRow1)
         //horizKeyRow1.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20.0).isActive = true
-        horizKeyRow1.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10.0).isActive = true
-        horizKeyRow1.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10.0).isActive = true
-
+        ///horizKeyRow1.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10.0).isActive = true
+        ///horizKeyRow1.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10.0).isActive = true
+        
+        arrayOfKeyboardRows += [horizKeyRow1]
+        vertKeyboardStackView = UIStackView(arrangedSubviews: arrayOfKeyboardRows)
+        vertKeyboardStackView.axis = .vertical
+        vertKeyboardStackView.distribution = .fillEqually
+        vertKeyboardStackView.spacing = 10
+        vertKeyboardStackView.translatesAutoresizingMaskIntoConstraints = false
+        vertKeyboardStackView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
+        
+        self.view.addSubview(vertKeyboardStackView)
+        vertKeyboardStackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 40.0).isActive = true
+        vertKeyboardStackView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10.0).isActive = true
+        vertKeyboardStackView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10.0).isActive = true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
