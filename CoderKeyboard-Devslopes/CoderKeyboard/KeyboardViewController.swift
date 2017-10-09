@@ -124,8 +124,12 @@ class KeyboardViewController: UIInputViewController {
         return button
     }
     
-    @objc func action(sender: UIButton!) {
-        print("Button \(String(describing: sender.currentTitle)) was clicked with tag = \(sender.tag)")
+    @objc func action(sender: UIButton) {
+        
+        if let buttonTitle = sender.title(for: .normal) {
+            print("Button \(buttonTitle) was clicked with tag = \(sender.tag)")
+            self.textDocumentProxy.insertText("\(buttonTitle)")
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
