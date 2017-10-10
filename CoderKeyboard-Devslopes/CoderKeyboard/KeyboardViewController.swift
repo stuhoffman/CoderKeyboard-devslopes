@@ -210,10 +210,12 @@ class KeyboardViewController: UIInputViewController {
             case "⇧":
                 addToText = false
                 if shiftIsOn{
-                    print("Shift is on")
+                    print("Shift is on, turning off")
+                    changeKeyboardCase(goUpper: false)
                     shiftIsOn = false
                 } else {
-                    print("Shift is off")
+                    print("Shift is off, turning on")
+                    changeKeyboardCase(goUpper: true)
                     shiftIsOn = true
                 }
             case "del":
@@ -299,7 +301,47 @@ class KeyboardViewController: UIInputViewController {
         return button
     }
     
+    func changeKeyboardCase(goUpper: Bool){
+        for v in horizKeyRow1.arrangedSubviews {
+            let b:UIButton = v as! UIButton
+            if goUpper {
+                let title = b.title(for: .normal)?.uppercased();
+                b.setTitle(title, for: .normal);
+                print("Uppercasing \(String(describing: title))");
+            } else {
+                let title = b.title(for: .normal)?.lowercased();
+                b.setTitle(title, for: .normal);
+                print("Lowercasing \(String(describing: title))");
+            }
+        }
 
+        for v in horizKeyRow2.arrangedSubviews {
+            let b:UIButton = v as! UIButton
+            if goUpper {
+                let title = b.title(for: .normal)?.uppercased();
+                b.setTitle(title, for: .normal);
+                print("Uppercasing \(String(describing: title))");
+            } else {
+                let title = b.title(for: .normal)?.lowercased();
+                b.setTitle(title, for: .normal);
+                print("Lowercasing \(String(describing: title))");
+            }
+        }
+
+        for v in horizKeyRow3.arrangedSubviews {
+            let b:UIButton = v as! UIButton
+            if goUpper {
+                let title = b.title(for: .normal)?.uppercased();
+                b.setTitle(title, for: .normal);
+                print("Uppercasing \(String(describing: title))");
+            } else {
+                let title = b.title(for: .normal)?.lowercased();
+                b.setTitle(title, for: .normal);
+                print("Lowercasing \(String(describing: title))");
+            }
+        }
+
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated
