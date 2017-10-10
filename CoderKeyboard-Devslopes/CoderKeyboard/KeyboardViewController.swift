@@ -11,7 +11,6 @@ import UIKit
 class KeyboardViewController: UIInputViewController {
 //MARK: =====> OUTLETS
     @IBOutlet var nextKeyboardButton: UIButton!
-    //@IBOutlet var bracesHotButton: UIButton!
     
     //MARK: ====> Vars
     var bracesHotButton: UIButton!
@@ -47,7 +46,7 @@ class KeyboardViewController: UIInputViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         let textColor: UIColor = UIColor.white
-        let viewBgColor: UIColor = UIColor(red: 63/255, green: 64/255, blue: 68/255, alpha: 0.5)
+        let viewBgColor: UIColor = UIColor(red: 63/255, green: 64/255, blue: 68/255, alpha: 1)
         
         let actionLabel: UILabel = UILabel()
         actionLabel.text = "RECENT"
@@ -132,27 +131,14 @@ class KeyboardViewController: UIInputViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Perform custom UI setup here DEFAULT SECTION
-//        self.nextKeyboardButton = UIButton(type: .system)
-//
-//        self.nextKeyboardButton.setTitle(NSLocalizedString("Back", comment: "Title for 'Next Keyboard' button"), for: [])
-//        self.nextKeyboardButton.sizeToFit()
-//        self.nextKeyboardButton.translatesAutoresizingMaskIntoConstraints = false
-//
-//        self.nextKeyboardButton.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
-//
-//        self.view.addSubview(self.nextKeyboardButton)
-//
-//        self.nextKeyboardButton.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-//        self.nextKeyboardButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-//
+
     }
     
     
     //makeHotButton is meant to create a new UIButton for our HotButtons array then add them to the array
     func makeHotButton(title: String, desc: String) -> UIButton{
         let button = UIButton(type: .system)
-        let buttonBgColor: UIColor = UIColor(red: 41/255, green: 43/255, blue: 53/255, alpha: 0.5)
+        let buttonBgColor: UIColor = UIColor(red: 41/255, green: 43/255, blue: 53/255, alpha: 1)
         button.setTitle(NSLocalizedString(title, comment: desc), for: [])
         button.sizeToFit()
         button.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 16)!
