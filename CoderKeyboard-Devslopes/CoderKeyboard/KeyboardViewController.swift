@@ -119,7 +119,7 @@ class KeyboardViewController: UIInputViewController {
         vertKeyboardStackView = UIStackView(arrangedSubviews: arrayOfKeyboardRows)
         vertKeyboardStackView.axis = .vertical
         vertKeyboardStackView.distribution = .fillEqually
-        vertKeyboardStackView.spacing = 10
+        vertKeyboardStackView.spacing = 5
         vertKeyboardStackView.translatesAutoresizingMaskIntoConstraints = false
         vertKeyboardStackView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
 
@@ -207,29 +207,28 @@ class KeyboardViewController: UIInputViewController {
         if let buttonTitle = sender.title(for: .normal) {
             var addToText: Bool = true
             switch buttonTitle {
-            case "shift":
+            case "⇧":
                 addToText = false
                 if shiftIsOn{
+                    print("Shift is on")
                     shiftIsOn = false
-                    buttonsTextColor = UIColor.white
                 } else {
+                    print("Shift is off")
                     shiftIsOn = true
-                    buttonsTextColor = UIColor.blue
                 }
-            case "del","return","@":
+            case "del","return":
                 addToText = false
             case "space":
                 workingTitle = " "
                 self.textDocumentProxy.insertText("\(workingTitle)")
                 addToText = false
             case "return":
-                workingTitle = "/n"
-                self.textDocumentProxy.insertText("/n")
+                workingTitle = "\r\n"
+                self.textDocumentProxy.insertText(workingTitle)
                 addToText = false
             default:
                 buttonsTextColor = UIColor.white
                 insertBetween = false
-                shiftIsOn = false
             }
             
             if shiftIsOn {
@@ -262,7 +261,7 @@ class KeyboardViewController: UIInputViewController {
         horizKeyRow2 = UIStackView(arrangedSubviews: arrayOfKeysRow2)
 
         //MARK: ====> ROW 3 of Keyboard
-        let row3Array = ["shift","z","x","c","v","b","n","m","del"]
+        let row3Array = ["⇧","z","x","c","v","b","n","m","del"]
         for key in row3Array {
             arrayOfKeysRow3 += [addRegularKey(title: key, desc: key)]
         }
