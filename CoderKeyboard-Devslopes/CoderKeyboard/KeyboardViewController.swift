@@ -216,7 +216,8 @@ class KeyboardViewController: UIInputViewController {
                     print("Shift is off")
                     shiftIsOn = true
                 }
-            case "del","return":
+            case "del":
+                self.textDocumentProxy.deleteBackward()
                 addToText = false
             case "space":
                 workingTitle = " "
@@ -237,7 +238,7 @@ class KeyboardViewController: UIInputViewController {
                 workingTitle = buttonTitle
             }
             if addToText {
-                    print("Button \(workingTitle) was clicked with tag = \(sender.tag)")
+                    print("Button \(workingTitle) was clicked")
                     self.textDocumentProxy.insertText("\(workingTitle)")
             }
         }
