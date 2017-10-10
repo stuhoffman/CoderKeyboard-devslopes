@@ -269,7 +269,7 @@ class KeyboardViewController: UIInputViewController {
         horizKeyRow3 = UIStackView(arrangedSubviews: arrayOfKeysRow3)
 
         //MARK: ====> ROW 4 of Keyboard
-        let row4Array = ["back","@",".","space","return"]
+        let row4Array = ["(){}","😀",".","space","return"]
         for key in row4Array {
             arrayOfKeysRow4 += [addRegularKey(title: key, desc: key)]
         }
@@ -286,7 +286,7 @@ class KeyboardViewController: UIInputViewController {
         button.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 14)!
         button.translatesAutoresizingMaskIntoConstraints = false
         //button.tag = arrayOfHotButtons.count
-        if title == "back" {
+        if title == "(){}" || title == "😀" {
             button.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
         } else {
             button.addTarget(self, action: #selector(keyAction), for: UIControlEvents.touchUpInside)
