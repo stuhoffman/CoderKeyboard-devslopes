@@ -133,9 +133,9 @@ class KeyboardViewController: UIInputViewController {
         //MARK: ====> Fitting the Hot Button StackView into a UIScrollView
         hotButtonScrollView = UIScrollView()
         hotButtonScrollView.addSubview(horizHotStackView)
-        hotButtonScrollView.contentOffset = CGPoint(x: 200,y: 0)
-        //horizHotStackView.leadingAnchor.constraint(equalTo: hotButtonScrollView.leadingAnchor).isActive = true
-        //horizHotStackView.trailingAnchor.constraint(equalTo: hotButtonScrollView.trailingAnchor).isActive = true
+        //makes no diff hotButtonScrollView.contentOffset = CGPoint(x: 200,y: 0)
+        horizHotStackView.leadingAnchor.constraint(equalTo: hotButtonScrollView.leadingAnchor).isActive = true
+        horizHotStackView.trailingAnchor.constraint(equalTo: hotButtonScrollView.trailingAnchor).isActive = true
         horizHotStackView.bottomAnchor.constraint(equalTo: hotButtonScrollView.bottomAnchor).isActive = true
         horizHotStackView.topAnchor.constraint(equalTo: hotButtonScrollView.topAnchor).isActive = true
         //horizHotStackView.widthAnchor.constraint(equalTo: hotButtonScrollView.widthAnchor).isActive = true
