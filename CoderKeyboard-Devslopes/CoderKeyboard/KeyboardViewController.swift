@@ -27,12 +27,13 @@ class KeyboardViewController: UIInputViewController {
     var horizKeyRow3: UIStackView!
     var horizKeyRow4: UIStackView!
     var vertKeyboardStackView: UIStackView!
+    var hotButtonScrollView: UIScrollView!
     var arrayOfHotButtons: [UIButton] = []
     var arrayOfKeysRow1: [UIButton] = []
     var arrayOfKeysRow2: [UIButton] = []
     var arrayOfKeysRow3: [UIButton] = []
     var arrayOfKeysRow4: [UIButton] = []
-    var arrayOfKeyboardRows: [UIStackView] = []
+    var arrayOfKeyboardRows: [UIView] = []
     var backButton: UIButton!
     var actionLabel: UILabel!
     var buttonsTextColor: UIColor = UIColor.white //default
@@ -112,6 +113,13 @@ class KeyboardViewController: UIInputViewController {
         self.letHotButton = makeHotButton(title: "let", desc: "Insert let keyword place cursor after the word let")
         self.quoteHotButton = makeHotButton(title: "\"\"", desc: "Insert left and right quotes place cursor in the middle")
         self.codeHotButton = makeHotButton(title: "code", desc: "Insert code keyword place cursor after the word code")
+        self.codeHotButton = makeHotButton(title: "func", desc: "Insert the keyword func")
+        self.codeHotButton = makeHotButton(title: "enum", desc: "Insert the keyword enum")
+        self.codeHotButton = makeHotButton(title: "return", desc: "Insert the keyword return")
+        self.codeHotButton = makeHotButton(title: "struct", desc: "Insert the keyword struct")
+        self.codeHotButton = makeHotButton(title: "class", desc: "Insert the keyword class")
+        self.codeHotButton = makeHotButton(title: "weak", desc: "Insert the keyword weak")
+        self.codeHotButton = makeHotButton(title: "bool", desc: "Insert the keyword bool")
         
         //MARK: ====> THE STACK VIEW
         horizHotStackView = UIStackView(arrangedSubviews: arrayOfHotButtons)
@@ -120,8 +128,19 @@ class KeyboardViewController: UIInputViewController {
         horizHotStackView.alignment = .fill
         horizHotStackView.spacing = 10
         horizHotStackView.translatesAutoresizingMaskIntoConstraints = false
-        horizHotStackView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
-        arrayOfKeyboardRows += [horizHotStackView]
+       // horizHotStackView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
+        
+        //MARK: ====> Fitting the Hot Button StackView into a UIScrollView
+        hotButtonScrollView = UIScrollView()
+        hotButtonScrollView.addSubview(horizHotStackView)
+        hotButtonScrollView.contentOffset = CGPoint(x: 200,y: 0)
+        //horizHotStackView.leadingAnchor.constraint(equalTo: hotButtonScrollView.leadingAnchor).isActive = true
+        //horizHotStackView.trailingAnchor.constraint(equalTo: hotButtonScrollView.trailingAnchor).isActive = true
+        horizHotStackView.bottomAnchor.constraint(equalTo: hotButtonScrollView.bottomAnchor).isActive = true
+        horizHotStackView.topAnchor.constraint(equalTo: hotButtonScrollView.topAnchor).isActive = true
+        //horizHotStackView.widthAnchor.constraint(equalTo: hotButtonScrollView.widthAnchor).isActive = true
+        
+        arrayOfKeyboardRows += [hotButtonScrollView]
         
         //MARK: =====> Making the keyboard ROW 1
         buildRegularKeyboard()
