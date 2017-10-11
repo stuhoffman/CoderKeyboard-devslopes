@@ -19,6 +19,8 @@ class KeyboardViewController: UIInputViewController {
     var letHotButton: UIButton!
     var quoteHotButton: UIButton!
     var codeHotButton: UIButton!
+    var horizSwipeStackView: UIStackView!
+    var horizLabelStackView: UIStackView!
     var horizHotStackView: UIStackView!
     var horizKeyRow1: UIStackView!
     var horizKeyRow2: UIStackView!
@@ -45,17 +47,61 @@ class KeyboardViewController: UIInputViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        let textColor: UIColor = UIColor.white
+        //let textColor: UIColor = UIColor.white
         let viewBgColor: UIColor = UIColor(red: 63/255, green: 64/255, blue: 68/255, alpha: 1)
+        let swipeBgColor: UIColor = UIColor(red: 41/255, green: 43/255, blue: 53/255, alpha: 1)
         
-        let actionLabel: UILabel = UILabel()
-        actionLabel.text = "RECENT"
-        actionLabel.font = UIFont(name: "Montserrat-Regular", size: 10)
-        actionLabel.textColor = textColor
-        actionLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(actionLabel)
-        actionLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10.0).isActive = true
-        actionLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 5.0).isActive = true
+        //MARK: ===> Swipe Stack View
+        /*The trick here is to get a background color for a UIStackView you need to:
+         1. Create a UIView
+         2. Set its bounds to the same size as the StackView
+         3. Set MaskingConstraints to fals
+         4. Set autoresizing to flexibleTopMargin and flexibleWidth
+         5. Set the sub views backgroundColor
+         6. add the subview to the StackView.
+         7. Set the anchors for the sub view.
+        */
+        let swipeButton: UIButton = UIButton()
+        swipeButton.setTitle(NSLocalizedString("☟SWIPE DOWN FOR MORE", comment: "Swipe Down For More"), for: [])
+        swipeButton.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 8)!
+        swipeButton.translatesAutoresizingMaskIntoConstraints = false
+        horizSwipeStackView = UIStackView()
+        let swipeBgView = UIView(frame: horizSwipeStackView.bounds)
+        swipeBgView.translatesAutoresizingMaskIntoConstraints = false
+        swipeBgView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
+        swipeBgView.backgroundColor = swipeBgColor
+        horizSwipeStackView.addSubview(swipeBgView)
+        swipeBgView.topAnchor.constraint(equalTo: horizSwipeStackView.topAnchor).isActive = true
+        swipeBgView.bottomAnchor.constraint(equalTo: horizSwipeStackView.bottomAnchor).isActive = true
+        swipeBgView.leftAnchor.constraint(equalTo: horizSwipeStackView.leftAnchor).isActive = true
+        swipeBgView.rightAnchor.constraint(equalTo: horizSwipeStackView.rightAnchor).isActive = true
+        //Carry on with the StackView.
+        horizSwipeStackView.addArrangedSubview(swipeButton)
+        horizSwipeStackView.axis = .horizontal
+        horizSwipeStackView.distribution = .fillEqually
+        horizSwipeStackView.alignment = .center
+        horizSwipeStackView.spacing = 4
+        horizSwipeStackView.translatesAutoresizingMaskIntoConstraints = false
+        horizSwipeStackView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
+        self.view.addSubview(horizSwipeStackView)
+        horizSwipeStackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 5.0).isActive = true
+        horizSwipeStackView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 5).isActive = true
+        horizSwipeStackView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -5.0).isActive = true
+        
+        let recentButton: UIButton = UIButton()
+        recentButton.setTitle(NSLocalizedString("RECENT", comment: "Recently Used Buttons"), for: [])
+        recentButton.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 8)!
+        recentButton.translatesAutoresizingMaskIntoConstraints = false
+        horizLabelStackView = UIStackView(arrangedSubviews: [recentButton])
+        horizLabelStackView.axis = .horizontal
+        horizLabelStackView.distribution = .fill
+        horizLabelStackView.alignment = .leading
+        horizLabelStackView.spacing = 4
+        horizLabelStackView.translatesAutoresizingMaskIntoConstraints = false
+        horizLabelStackView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
+        self.view.addSubview(horizLabelStackView)
+        horizLabelStackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20.0).isActive = true
+        horizLabelStackView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 5).isActive = true
         
         self.view.backgroundColor = viewBgColor
         
@@ -119,12 +165,12 @@ class KeyboardViewController: UIInputViewController {
         vertKeyboardStackView = UIStackView(arrangedSubviews: arrayOfKeyboardRows)
         vertKeyboardStackView.axis = .vertical
         vertKeyboardStackView.distribution = .fillEqually
-        vertKeyboardStackView.spacing = 4
+        vertKeyboardStackView.spacing = 5
         vertKeyboardStackView.translatesAutoresizingMaskIntoConstraints = false
         vertKeyboardStackView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
 
         self.view.addSubview(vertKeyboardStackView)
-        vertKeyboardStackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 45.0).isActive = true
+        vertKeyboardStackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 40.0).isActive = true
         vertKeyboardStackView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 5).isActive = true
         vertKeyboardStackView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -5.0).isActive = true
     }
@@ -271,7 +317,7 @@ class KeyboardViewController: UIInputViewController {
         horizKeyRow3 = UIStackView(arrangedSubviews: arrayOfKeysRow3)
 
         //MARK: ====> ROW 4 of Keyboard
-        let row4Array = ["(){}","😀",".","        space        ","return"]
+        let row4Array = ["=","😀",".","        space        ","return"]
         for key in row4Array {
             arrayOfKeysRow4 += [addRegularKey(title: key, desc: key)]
         }
