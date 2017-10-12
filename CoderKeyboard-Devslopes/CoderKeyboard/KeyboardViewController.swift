@@ -302,8 +302,10 @@ class KeyboardViewController: UIInputViewController {
             }
             //Sounds for the keys, tried UIInputViewAudioFeedback but had problems. this works
             AudioServicesPlaySystemSound(1104)
-            if shiftIsOn {
+            if shiftIsOn && buttonTitle != "⇧"{
                 workingTitle = buttonTitle.uppercased()
+                shiftIsOn = false
+                changeKeyboardCase(goUpper: false)
             } else {
                 workingTitle = buttonTitle
             }
