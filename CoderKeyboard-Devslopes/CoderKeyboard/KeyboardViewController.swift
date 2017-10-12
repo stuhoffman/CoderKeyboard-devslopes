@@ -254,7 +254,16 @@ class KeyboardViewController: UIInputViewController {
                 self.textDocumentProxy.insertText("<\(buttonTitle)>")
                 self.textDocumentProxy.insertText("</\(buttonTitle)> ")
                 self.textDocumentProxy.adjustTextPosition(byCharacterOffset: -8)
-            } else {
+            } else if buttonTitle == "func" {
+                self.textDocumentProxy.insertText("\(buttonTitle) ")
+                self.textDocumentProxy.insertText("f: () {\r\n}")
+                self.textDocumentProxy.adjustTextPosition(byCharacterOffset: -9)
+            } else if buttonTitle == "enum" {
+                self.textDocumentProxy.insertText("\(buttonTitle) ")
+                self.textDocumentProxy.insertText("e {\r\ncase c1, case c2\r\n}")
+                self.textDocumentProxy.adjustTextPosition(byCharacterOffset: -23)
+            }
+            else {
                 self.textDocumentProxy.insertText("\(buttonTitle)")
                 if addASpace {
                     self.textDocumentProxy.insertText(" ")
