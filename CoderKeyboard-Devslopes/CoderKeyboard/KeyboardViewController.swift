@@ -20,16 +20,32 @@ class KeyboardViewController: UIInputViewController {
     var letHotButton: UIButton!
     var quoteHotButton: UIButton!
     var codeHotButton: UIButton!
+    var parenHotButton: UIButton!
+    var anglesHotButton: UIButton!
+    var lessthanHotButton: UIButton!
+    var greaterthanHotButton: UIButton!
+    var goesToHotButton: UIButton!
+    var plusHotButton: UIButton!
+    var minusHotButton: UIButton!
+    var multiplyHotButton: UIButton!
+    var divideHotButton: UIButton!
+    var uibuttonHotButton: UIButton!
+    var uilabelHotButton: UIButton!
+    var iboutletHotButton: UIButton!
+    var ibactionHotButton: UIButton!
     var horizSwipeStackView: UIStackView!
     var horizLabelStackView: UIStackView!
     var horizHotStackView: UIStackView!
+    var horizOperatorStackView: UIStackView!
     var horizKeyRow1: UIStackView!
     var horizKeyRow2: UIStackView!
     var horizKeyRow3: UIStackView!
     var horizKeyRow4: UIStackView!
     var vertKeyboardStackView: UIStackView!
     var hotButtonScrollView: UIScrollView!
+    var hotOperatorScrollView: UIScrollView!
     var arrayOfHotButtons: [UIButton] = []
+    var arrayOfHotOperatorButtons: [UIButton] = []
     var arrayOfKeysRow1: [UIButton] = []
     var arrayOfKeysRow2: [UIButton] = []
     var arrayOfKeysRow3: [UIButton] = []
@@ -41,6 +57,7 @@ class KeyboardViewController: UIInputViewController {
     var insertBetween: Bool = false //default
     var addASpace: Bool = false //default
     var shiftIsOn: Bool = false //default
+    var wrapSpaces: Bool = false //default
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -52,84 +69,83 @@ class KeyboardViewController: UIInputViewController {
         super.viewWillAppear(true)
         
         let viewBgColor: UIColor = UIColor(red: 63/255, green: 64/255, blue: 68/255, alpha: 1)
-        let swipeBgColor: UIColor = UIColor(red: 41/255, green: 43/255, blue: 53/255, alpha: 1)
-        
-        //MARK: ===> Swipe Stack View
-        /*The trick here is to get a background color for a UIStackView you need to:
-         1. Create a UIView
-         2. Set its bounds to the same size as the StackView
-         3. Set MaskingConstraints to fals
-         4. Set autoresizing to flexibleTopMargin and flexibleWidth
-         5. Set the sub views backgroundColor
-         6. add the subview to the StackView.
-         7. Set the anchors for the sub view.
-        */
-        let swipeButton: UIButton = UIButton()
-        swipeButton.setTitle(NSLocalizedString("☟SWIPE DOWN FOR MORE", comment: "Swipe Down For More"), for: [])
-        swipeButton.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 8)!
-        swipeButton.translatesAutoresizingMaskIntoConstraints = false
-        horizSwipeStackView = UIStackView()
-        let swipeBgView = UIView(frame: horizSwipeStackView.bounds)
-        swipeBgView.translatesAutoresizingMaskIntoConstraints = false
-        swipeBgView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
-        swipeBgView.backgroundColor = swipeBgColor
-        horizSwipeStackView.addSubview(swipeBgView)
-        swipeBgView.topAnchor.constraint(equalTo: horizSwipeStackView.topAnchor).isActive = true
-        swipeBgView.bottomAnchor.constraint(equalTo: horizSwipeStackView.bottomAnchor).isActive = true
-        swipeBgView.leftAnchor.constraint(equalTo: horizSwipeStackView.leftAnchor).isActive = true
-        swipeBgView.rightAnchor.constraint(equalTo: horizSwipeStackView.rightAnchor).isActive = true
-        //Carry on with the StackView.
-        horizSwipeStackView.addArrangedSubview(swipeButton)
-        horizSwipeStackView.axis = .horizontal
-        horizSwipeStackView.distribution = .fillEqually
-        horizSwipeStackView.alignment = .center
-        horizSwipeStackView.spacing = 4
-        horizSwipeStackView.translatesAutoresizingMaskIntoConstraints = false
-        horizSwipeStackView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
-        self.view.addSubview(horizSwipeStackView)
-        horizSwipeStackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 5.0).isActive = true
-        horizSwipeStackView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 5).isActive = true
-        horizSwipeStackView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -5.0).isActive = true
         
         let recentButton: UIButton = UIButton()
-        recentButton.setTitle(NSLocalizedString("RECENT", comment: "Recently Used Buttons"), for: [])
+        recentButton.setTitle(NSLocalizedString("SWIPE RIGHT FOR MORE", comment: "Recently Used Buttons"), for: [])
         recentButton.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 8)!
         recentButton.translatesAutoresizingMaskIntoConstraints = false
         horizLabelStackView = UIStackView(arrangedSubviews: [recentButton])
         horizLabelStackView.axis = .horizontal
         horizLabelStackView.distribution = .fill
-        horizLabelStackView.alignment = .leading
+        horizLabelStackView.alignment = .center
         horizLabelStackView.spacing = 4
         horizLabelStackView.translatesAutoresizingMaskIntoConstraints = false
         horizLabelStackView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
         self.view.addSubview(horizLabelStackView)
-        horizLabelStackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20.0).isActive = true
+        horizLabelStackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 1.0).isActive = true
         horizLabelStackView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 5).isActive = true
         
         self.view.backgroundColor = viewBgColor
         
-        //MARK: ====> HOT Buttons
-        self.bracesHotButton = makeHotButton(title: "{}", desc: "Insert left and right Braces place cursor in the middle")
-        self.bracketsHotButton = makeHotButton(title: "[]", desc: "Insert left and right Brackets place cursor in the middle")
-        self.varHotButton = makeHotButton(title: "var", desc: "Insert var keyword place cursor after the word var")
-        self.letHotButton = makeHotButton(title: "let", desc: "Insert let keyword place cursor after the word let")
-        self.quoteHotButton = makeHotButton(title: "\"\"", desc: "Insert left and right quotes place cursor in the middle")
-        self.codeHotButton = makeHotButton(title: "code", desc: "Insert code keyword place cursor after the word code")
-        self.codeHotButton = makeHotButton(title: "func", desc: "Insert the keyword func")
-        self.codeHotButton = makeHotButton(title: "enum", desc: "Insert the keyword enum")
-        self.codeHotButton = makeHotButton(title: "return", desc: "Insert the keyword return")
-        self.codeHotButton = makeHotButton(title: "struct", desc: "Insert the keyword struct")
-        self.codeHotButton = makeHotButton(title: "class", desc: "Insert the keyword class")
-        self.codeHotButton = makeHotButton(title: "weak", desc: "Insert the keyword weak")
-        self.codeHotButton = makeHotButton(title: "bool", desc: "Insert the keyword bool")
+        //MARK: ====> HOT Buttons TOP ROW
+        self.bracesHotButton = makeHotButton(title: "{}", desc: "Insert left and right Braces place cursor in the middle", row: "top")
+        self.bracketsHotButton = makeHotButton(title: "[]", desc: "Insert left and right Brackets place cursor in the middle", row: "top")
+        self.varHotButton = makeHotButton(title: "var", desc: "Insert var keyword place cursor after the word var", row: "top")
+        self.letHotButton = makeHotButton(title: "let", desc: "Insert let keyword place cursor after the word let", row: "top")
+        self.quoteHotButton = makeHotButton(title: "\"\"", desc: "Insert left and right quotes place cursor in the middle", row: "top")
+        self.codeHotButton = makeHotButton(title: "code", desc: "Insert code keyword place cursor after the word code", row: "top")
+        self.codeHotButton = makeHotButton(title: "func", desc: "Insert the keyword func", row: "top")
+        self.codeHotButton = makeHotButton(title: "enum", desc: "Insert the keyword enum", row: "top")
+        self.codeHotButton = makeHotButton(title: "return", desc: "Insert the keyword return", row: "top")
+        self.codeHotButton = makeHotButton(title: "struct", desc: "Insert the keyword struct", row: "top")
+        self.codeHotButton = makeHotButton(title: "class", desc: "Insert the keyword class", row: "top")
+        self.codeHotButton = makeHotButton(title: "weak", desc: "Insert the keyword weak", row: "top")
+        self.codeHotButton = makeHotButton(title: "bool", desc: "Insert the keyword bool", row: "top")
         
-        //MARK: ====> THE STACK VIEW
         horizHotStackView = UIStackView(arrangedSubviews: arrayOfHotButtons)
         horizHotStackView.axis = .horizontal
         horizHotStackView.distribution = .fillEqually
         horizHotStackView.alignment = .fill
         horizHotStackView.spacing = 10
         horizHotStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        //MARK: ====> THE STACK VIEW Bottom Row
+        horizOperatorStackView = UIStackView()
+        horizOperatorStackView.axis = .horizontal
+        horizOperatorStackView.distribution = .equalSpacing
+        horizOperatorStackView.alignment = .leading
+        horizOperatorStackView.spacing = 4
+        horizOperatorStackView.translatesAutoresizingMaskIntoConstraints = false
+        horizOperatorStackView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
+        self.view.addSubview(horizOperatorStackView)
+        horizOperatorStackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 5.0).isActive = true
+        horizOperatorStackView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 5).isActive = true
+        
+        //MARK: ====> HOT Buttons Bottom Row
+        self.parenHotButton = makeHotButton(title: "()", desc: "Insert left and right Paranthesis place cursor in the middle", row: "bottom")
+        self.anglesHotButton = makeHotButton(title: "<>", desc: "Insert left and right angle brackets place cursor in the middle", row: "bottom")
+        self.lessthanHotButton = makeHotButton(title: "<", desc: "Insert less than symbol", row: "bottom")
+        self.greaterthanHotButton = makeHotButton(title: ">", desc: "Insert greater than symbol", row: "bottom")
+        self.goesToHotButton = makeHotButton(title: "->", desc: "Insert -> symbol", row: "bottom")
+        self.plusHotButton = makeHotButton(title: "+", desc: "Insert plus sign", row: "bottom")
+        self.minusHotButton = makeHotButton(title: "-", desc: "Insert minus sign", row: "bottom")
+        self.multiplyHotButton = makeHotButton(title: "*", desc: "Insert multiplication sign", row: "bottom")
+        self.divideHotButton = makeHotButton(title: "/", desc: "Insert division sign", row: "bottom")
+        self.uibuttonHotButton = makeHotButton(title: "UIButton", desc: "Insert the UIButton keyword", row: "bottom")
+        self.uilabelHotButton = makeHotButton(title: "UILabel", desc: "Insert the UILabel keyword", row: "bottom")
+        self.iboutletHotButton = makeHotButton(title: "IBOutlet", desc: "Insert the IBOutlet keyword", row: "bottom")
+        self.ibactionHotButton = makeHotButton(title: "IBAction", desc: "Insert the IBAction keyword", row: "bottom")
+
+        horizOperatorStackView = UIStackView(arrangedSubviews: arrayOfHotOperatorButtons)
+        horizOperatorStackView.axis = .horizontal
+        horizOperatorStackView.distribution = .fillEqually
+        horizOperatorStackView.alignment = .fill
+        horizOperatorStackView.spacing = 10
+        horizOperatorStackView.translatesAutoresizingMaskIntoConstraints = false
+
+        
+        
+        
         
         //MARK: ====> Fitting the Hot Button StackView into a UIScrollView
         hotButtonScrollView = UIScrollView()
@@ -139,7 +155,15 @@ class KeyboardViewController: UIInputViewController {
         horizHotStackView.bottomAnchor.constraint(equalTo: hotButtonScrollView.bottomAnchor).isActive = true
         horizHotStackView.topAnchor.constraint(equalTo: hotButtonScrollView.topAnchor).isActive = true
         
+        hotOperatorScrollView = UIScrollView()
+        hotOperatorScrollView.addSubview(horizOperatorStackView)
+        horizOperatorStackView.leadingAnchor.constraint(equalTo: hotOperatorScrollView.leadingAnchor).isActive = true
+        horizOperatorStackView.trailingAnchor.constraint(equalTo: hotOperatorScrollView.trailingAnchor).isActive = true
+        horizOperatorStackView.bottomAnchor.constraint(equalTo: hotOperatorScrollView.bottomAnchor).isActive = true
+        horizOperatorStackView.topAnchor.constraint(equalTo: hotOperatorScrollView.topAnchor).isActive = true
+        
         arrayOfKeyboardRows += [hotButtonScrollView]
+        arrayOfKeyboardRows += [hotOperatorScrollView]
         
         //MARK: =====> Making the keyboard ROW 1
         buildRegularKeyboard()
@@ -188,7 +212,7 @@ class KeyboardViewController: UIInputViewController {
         vertKeyboardStackView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
 
         self.view.addSubview(vertKeyboardStackView)
-        vertKeyboardStackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 40.0).isActive = true
+        vertKeyboardStackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20.0).isActive = true
         vertKeyboardStackView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 5).isActive = true
         vertKeyboardStackView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -5.0).isActive = true
     }
@@ -200,7 +224,7 @@ class KeyboardViewController: UIInputViewController {
     
     
     //makeHotButton is meant to create a new UIButton for our HotButtons array then add them to the array
-    func makeHotButton(title: String, desc: String) -> UIButton{
+    func makeHotButton(title: String, desc: String, row: String) -> UIButton{
         let button = UIButton(type: .system)
         let buttonBgColor: UIColor = UIColor(red: 41/255, green: 43/255, blue: 53/255, alpha: 1)
         var hotButtonTextColor = UIColor.white
@@ -215,18 +239,25 @@ class KeyboardViewController: UIInputViewController {
         button.layer.borderWidth = 1
         button.layer.backgroundColor = buttonBgColor.cgColor
         switch title {
-        case "var","let","func","enum","return","struct","class","weak","bool","code":
+        case "var","let","func","enum","return","struct","class","weak","bool","code","UIButton","UILabel","IBOutlet","IBAction":
             hotButtonTextColor = UIColor(red: 240/255, green: 53/255, blue: 253/255, alpha: 1)
         case "\"\"":
             hotButtonTextColor = UIColor(red: 255/255, green: 1/255, blue: 1/255, alpha: 1)
-        case "{}","[]":
+        case "{}","[]","<>","()":
             hotButtonTextColor = UIColor.white
         default:
             hotButtonTextColor = UIColor.white
         }
         
         button.setTitleColor(hotButtonTextColor, for:[])
-        arrayOfHotButtons += [button]
+        
+        if row == "top"
+        {
+            arrayOfHotButtons += [button]
+        } else
+        {
+            arrayOfHotOperatorButtons += [button]
+        }
         return button
     }
     
@@ -234,13 +265,16 @@ class KeyboardViewController: UIInputViewController {
     @objc func hotAction(sender: UIButton) {
         insertBetween = false
         addASpace = false
+        wrapSpaces = false
         if let buttonTitle = sender.title(for: .normal) {
             switch buttonTitle {
-            case "var","let","func","enum","return","struct","class","weak","bool","code":
+            case "var","let","func","enum","return","struct","class","weak","bool","code","UIButton","UILabel","IBOutlet","IBAction":
                 addASpace = true
+            case "<",">","->","+","-","*","/":
+                wrapSpaces = true
             case "\"\"":
                 insertBetween = true
-            case "{}","[]":
+            case "{}","[]","<>","()":
                 insertBetween = true
             default: break
             }
@@ -267,11 +301,23 @@ class KeyboardViewController: UIInputViewController {
                 self.textDocumentProxy.insertText("\(buttonTitle) ")
                 self.textDocumentProxy.insertText("SomeClass {\r\n//code\r\n}")
                 self.textDocumentProxy.adjustTextPosition(byCharacterOffset: -13)
+            }else if buttonTitle == "UIButton" {
+                self.textDocumentProxy.insertText(": \(buttonTitle)")
+            }else if buttonTitle == "UILabel" {
+                self.textDocumentProxy.insertText(": \(buttonTitle)")
+            }else if buttonTitle == "IBOutlet" {
+                self.textDocumentProxy.insertText("@\(buttonTitle) var name: type ")
+            }else if buttonTitle == "IBAction" {
+                self.textDocumentProxy.insertText("@\(buttonTitle) func name(_ sender: type?) { }")
+                self.textDocumentProxy.adjustTextPosition(byCharacterOffset: -1)
             }
             else {
-                self.textDocumentProxy.insertText("\(buttonTitle)")
-                if addASpace {
-                    self.textDocumentProxy.insertText(" ")
+                if !wrapSpaces && !addASpace {
+                    self.textDocumentProxy.insertText("\(buttonTitle)")
+                }else if wrapSpaces {
+                    self.textDocumentProxy.insertText(" \(buttonTitle) ")
+                }else if addASpace {
+                    self.textDocumentProxy.insertText("\(buttonTitle) ")
                 }
             }
 

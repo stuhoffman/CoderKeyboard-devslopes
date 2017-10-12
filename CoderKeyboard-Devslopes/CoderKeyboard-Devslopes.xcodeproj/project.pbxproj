@@ -16,6 +16,7 @@
 		20E5DC611F867AE500C1BC78 /* CoderKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 20E5DC5A1F867AE500C1BC78 /* CoderKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		20E612DD1F8B3736006D0EC7 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 208BDA341F8A066900E326AD /* Montserrat-Regular.otf */; };
 		20E612DE1F8B3737006D0EC7 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 208BDA341F8A066900E326AD /* Montserrat-Regular.otf */; };
+		20E99FDC1F8F209500EF6BC7 /* CustomPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E99FDB1F8F209500EF6BC7 /* CustomPageVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		20E5DC5A1F867AE500C1BC78 /* CoderKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CoderKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		20E5DC5C1F867AE500C1BC78 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		20E5DC5E1F867AE500C1BC78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20E99FDB1F8F209500EF6BC7 /* CustomPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPageVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 			children = (
 				201E62361F89C99A00950112 /* CoderKeyboard.entitlements */,
 				20E5DC5C1F867AE500C1BC78 /* KeyboardViewController.swift */,
+				20E99FDB1F8F209500EF6BC7 /* CustomPageVC.swift */,
 				20E5DC5E1F867AE500C1BC78 /* Info.plist */,
 			);
 			path = CoderKeyboard;
@@ -251,6 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20E99FDC1F8F209500EF6BC7 /* CustomPageVC.swift in Sources */,
 				20E5DC5D1F867AE500C1BC78 /* KeyboardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
