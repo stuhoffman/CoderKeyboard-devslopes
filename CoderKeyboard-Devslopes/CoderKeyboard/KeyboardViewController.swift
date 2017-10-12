@@ -38,6 +38,7 @@ class KeyboardViewController: UIInputViewController {
     var actionLabel: UILabel!
     var buttonsTextColor: UIColor = UIColor.white //default
     var insertBetween: Bool = false //default
+    var addASpace: Bool = false //default
     var shiftIsOn: Bool = false //default
     
     
@@ -204,6 +205,7 @@ class KeyboardViewController: UIInputViewController {
     func makeHotButton(title: String, desc: String) -> UIButton{
         let button = UIButton(type: .system)
         let buttonBgColor: UIColor = UIColor(red: 41/255, green: 43/255, blue: 53/255, alpha: 1)
+        var hotButtonTextColor = UIColor.white
         button.setTitle(NSLocalizedString(title, comment: desc), for: [])
         button.sizeToFit()
         button.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 16)!
@@ -215,48 +217,46 @@ class KeyboardViewController: UIInputViewController {
         button.layer.borderWidth = 1
         button.layer.backgroundColor = buttonBgColor.cgColor
         switch title {
-        case "var","let":
-            buttonsTextColor = UIColor(red: 240/255, green: 53/255, blue: 253/255, alpha: 1)
+        case "var","let","func","enum","return","struct","class","weak","bool","code":
+            hotButtonTextColor = UIColor(red: 240/255, green: 53/255, blue: 253/255, alpha: 1)
         case "\"\"":
-            buttonsTextColor = UIColor(red: 255/255, green: 1/255, blue: 1/255, alpha: 1)
+            hotButtonTextColor = UIColor(red: 255/255, green: 1/255, blue: 1/255, alpha: 1)
         case "{}","[]":
-            buttonsTextColor = UIColor.white
+            hotButtonTextColor = UIColor.white
         default:
-            buttonsTextColor = UIColor.white
+            hotButtonTextColor = UIColor.white
         }
         
-        button.setTitleColor(buttonsTextColor, for:[])
-        //button.titleLabel?.font = UIFont(name: "Montserrat", size: 12)!
+        button.setTitleColor(hotButtonTextColor, for:[])
         arrayOfHotButtons += [button]
         return button
     }
     
     //MARK: ===> Hot Button Action Function
     @objc func hotAction(sender: UIButton) {
-        
+        insertBetween = false
+        addASpace = false
         if let buttonTitle = sender.title(for: .normal) {
             switch buttonTitle {
-            case "var","let":
-                buttonsTextColor = UIColor(red: 240/255, green: 53/255, blue: 253/255, alpha: 1)
-                insertBetween = false
+            case "var","let","func","enum","return","struct","class","weak","bool","code":
+                addASpace = true
             case "\"\"":
-                buttonsTextColor = UIColor(red: 255/255, green: 1/255, blue: 1/255, alpha: 1)
                 insertBetween = true
             case "{}","[]":
-                buttonsTextColor = UIColor.white
                 insertBetween = true
-            default:
-                buttonsTextColor = UIColor.white
-                insertBetween = false
+            default: break
             }
             
-            print("Button \(buttonTitle) was clicked with tag = \(sender.tag)")
+            print("Button \(buttonTitle) was clicked")
             if buttonTitle == "code" {
                 self.textDocumentProxy.insertText("<\(buttonTitle)>")
-                self.textDocumentProxy.insertText("</\(buttonTitle)>")
-                self.textDocumentProxy.adjustTextPosition(byCharacterOffset: -7)
+                self.textDocumentProxy.insertText("</\(buttonTitle)> ")
+                self.textDocumentProxy.adjustTextPosition(byCharacterOffset: -8)
             } else {
                 self.textDocumentProxy.insertText("\(buttonTitle)")
+                if addASpace {
+                    self.textDocumentProxy.insertText(" ")
+                }
             }
 
             if insertBetween {
@@ -312,7 +312,7 @@ class KeyboardViewController: UIInputViewController {
     }
 
     
-    //MARK: ====> Builing Regular Keyboard
+    //MARK: ====> Building Regular Keyboard
     func buildRegularKeyboard() {
         //MARK: ====> ROW 1 of Keyboard
         let row1Array = ["q","w","e","r","t","y","u","i","o","p"]
