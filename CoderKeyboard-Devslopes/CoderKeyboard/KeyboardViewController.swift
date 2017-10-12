@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 class KeyboardViewController: UIInputViewController {
 //MARK: =====> OUTLETS
@@ -41,15 +42,15 @@ class KeyboardViewController: UIInputViewController {
     var addASpace: Bool = false //default
     var shiftIsOn: Bool = false //default
     
-    
     override func updateViewConstraints() {
         super.updateViewConstraints()
         
         // Add custom view sizing constraints here
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        //let textColor: UIColor = UIColor.white
+        
         let viewBgColor: UIColor = UIColor(red: 63/255, green: 64/255, blue: 68/255, alpha: 1)
         let swipeBgColor: UIColor = UIColor(red: 41/255, green: 43/255, blue: 53/255, alpha: 1)
         
@@ -246,7 +247,8 @@ class KeyboardViewController: UIInputViewController {
                 insertBetween = true
             default: break
             }
-            
+            //Sounds for the keys, tried UIInputViewAudioFeedback but had problems. this works
+            AudioServicesPlaySystemSound(1104)
             print("Button \(buttonTitle) was clicked")
             if buttonTitle == "code" {
                 self.textDocumentProxy.insertText("<\(buttonTitle)>")
@@ -298,7 +300,8 @@ class KeyboardViewController: UIInputViewController {
                 buttonsTextColor = UIColor.white
                 insertBetween = false
             }
-            
+            //Sounds for the keys, tried UIInputViewAudioFeedback but had problems. this works
+            AudioServicesPlaySystemSound(1104)
             if shiftIsOn {
                 workingTitle = buttonTitle.uppercased()
             } else {
