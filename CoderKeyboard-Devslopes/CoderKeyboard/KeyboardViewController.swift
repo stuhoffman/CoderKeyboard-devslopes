@@ -379,11 +379,9 @@ class KeyboardViewController: UIInputViewController {
             if goUpper {
                 let title = b.title(for: .normal)?.uppercased();
                 b.setTitle(title, for: .normal);
-                print("Uppercasing \(String(describing: title))");
             } else {
                 let title = b.title(for: .normal)?.lowercased();
                 b.setTitle(title, for: .normal);
-                print("Lowercasing \(String(describing: title))");
             }
         }
 
@@ -392,11 +390,9 @@ class KeyboardViewController: UIInputViewController {
             if goUpper {
                 let title = b.title(for: .normal)?.uppercased();
                 b.setTitle(title, for: .normal);
-                print("Uppercasing \(String(describing: title))");
             } else {
                 let title = b.title(for: .normal)?.lowercased();
                 b.setTitle(title, for: .normal);
-                print("Lowercasing \(String(describing: title))");
             }
         }
 
@@ -405,11 +401,9 @@ class KeyboardViewController: UIInputViewController {
             if goUpper {
                 let title = b.title(for: .normal)?.uppercased();
                 b.setTitle(title, for: .normal);
-                print("Uppercasing \(String(describing: title))");
             } else {
                 let title = b.title(for: .normal)?.lowercased();
                 b.setTitle(title, for: .normal);
-                print("Lowercasing \(String(describing: title))");
             }
         }
 
