@@ -84,6 +84,7 @@ class KeyboardViewController: UIInputViewController {
         self.view.addSubview(horizLabelStackView)
         horizLabelStackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 1.0).isActive = true
         horizLabelStackView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 5).isActive = true
+        horizLabelStackView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -5).isActive = true
         
         self.view.backgroundColor = viewBgColor
         
