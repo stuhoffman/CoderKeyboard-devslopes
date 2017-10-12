@@ -130,17 +130,14 @@ class KeyboardViewController: UIInputViewController {
         horizHotStackView.alignment = .fill
         horizHotStackView.spacing = 10
         horizHotStackView.translatesAutoresizingMaskIntoConstraints = false
-       // horizHotStackView.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
         
         //MARK: ====> Fitting the Hot Button StackView into a UIScrollView
         hotButtonScrollView = UIScrollView()
         hotButtonScrollView.addSubview(horizHotStackView)
-        //makes no diff hotButtonScrollView.contentOffset = CGPoint(x: 200,y: 0)
         horizHotStackView.leadingAnchor.constraint(equalTo: hotButtonScrollView.leadingAnchor).isActive = true
         horizHotStackView.trailingAnchor.constraint(equalTo: hotButtonScrollView.trailingAnchor).isActive = true
         horizHotStackView.bottomAnchor.constraint(equalTo: hotButtonScrollView.bottomAnchor).isActive = true
         horizHotStackView.topAnchor.constraint(equalTo: hotButtonScrollView.topAnchor).isActive = true
-        //horizHotStackView.widthAnchor.constraint(equalTo: hotButtonScrollView.widthAnchor).isActive = true
         
         arrayOfKeyboardRows += [hotButtonScrollView]
         
@@ -262,6 +259,14 @@ class KeyboardViewController: UIInputViewController {
                 self.textDocumentProxy.insertText("\(buttonTitle) ")
                 self.textDocumentProxy.insertText("e {\r\ncase c1, case c2\r\n}")
                 self.textDocumentProxy.adjustTextPosition(byCharacterOffset: -23)
+            } else if buttonTitle == "struct" {
+                self.textDocumentProxy.insertText("\(buttonTitle) ")
+                self.textDocumentProxy.insertText("SomeStructure {\r\n//code\r\n}")
+                self.textDocumentProxy.adjustTextPosition(byCharacterOffset: -13)
+            }else if buttonTitle == "class" {
+                self.textDocumentProxy.insertText("\(buttonTitle) ")
+                self.textDocumentProxy.insertText("SomeClass {\r\n//code\r\n}")
+                self.textDocumentProxy.adjustTextPosition(byCharacterOffset: -13)
             }
             else {
                 self.textDocumentProxy.insertText("\(buttonTitle)")
