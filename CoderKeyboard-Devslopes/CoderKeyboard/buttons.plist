@@ -2,8 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>buttonArray</key>
-	<array>
+	<key>buttons</key>
+	<dict>
+		<key>button-001</key>
 		<dict>
 			<key>type</key>
 			<string>insert between</string>
@@ -26,6 +27,7 @@
 			<key>currentposition</key>
 			<string>hotbar</string>
 		</dict>
+		<key>button-002</key>
 		<dict>
 			<key>type</key>
 			<string>insert between</string>
@@ -48,6 +50,7 @@
 			<key>currentposition</key>
 			<string>hotbar</string>
 		</dict>
+		<key>button-003</key>
 		<dict>
 			<key>type</key>
 			<string>insert between</string>
@@ -70,6 +73,7 @@
 			<key>currentposition</key>
 			<string>hotbar</string>
 		</dict>
+		<key>button-004</key>
 		<dict>
 			<key>type</key>
 			<string>insert between</string>
@@ -92,6 +96,7 @@
 			<key>currentposition</key>
 			<string>hotbar</string>
 		</dict>
+		<key>button-005</key>
 		<dict>
 			<key>type</key>
 			<string>insert between</string>
@@ -114,6 +119,7 @@
 			<key>currentposition</key>
 			<string>hotbar</string>
 		</dict>
+		<key>button-006</key>
 		<dict>
 			<key>type</key>
 			<string>insert between</string>
@@ -136,6 +142,98 @@
 			<key>currentposition</key>
 			<string>hotbar</string>
 		</dict>
-	</array>
+		<key>button-007</key>
+		<dict>
+			<key>type</key>
+			<string>keyword</string>
+			<key>name</key>
+			<string>class</string>
+			<key>text</key>
+			<string>class: b(){\r\n}</string>
+			<key>display</key>
+			<string>class</string>
+			<key>backuplength</key>
+			<integer>-7</integer>
+			<key>leadingspace</key>
+			<false/>
+			<key>trailingspace</key>
+			<true/>
+			<key>startingposition</key>
+			<string>background</string>
+			<key>imagename</key>
+			<string>class</string>
+			<key>currentposition</key>
+			<string>background</string>
+		</dict>
+		<key>button-008</key>
+		<dict>
+			<key>type</key>
+			<string>keyword</string>
+			<key>name</key>
+			<string>else</string>
+			<key>text</key>
+			<string>else{\r\n}</string>
+			<key>display</key>
+			<string>else</string>
+			<key>backuplength</key>
+			<integer>-2</integer>
+			<key>leadingspace</key>
+			<true/>
+			<key>trailingspace</key>
+			<true/>
+			<key>startingposition</key>
+			<string>background</string>
+			<key>imagename</key>
+			<string>else</string>
+			<key>currentposition</key>
+			<string>background</string>
+		</dict>
+		<key>button-009</key>
+		<dict>
+			<key>type</key>
+			<string>keyword</string>
+			<key>name</key>
+			<string>enum</string>
+			<key>text</key>
+			<string>enum{ case 1, case 2}</string>
+			<key>display</key>
+			<string>enum</string>
+			<key>backuplength</key>
+			<integer>-14</integer>
+			<key>leadingspace</key>
+			<false/>
+			<key>trailingspace</key>
+			<true/>
+			<key>startingposition</key>
+			<string>background</string>
+			<key>imagename</key>
+			<string>enum</string>
+			<key>currentposition</key>
+			<string>background</string>
+		</dict>
+		<key>button-010</key>
+		<dict>
+			<key>type</key>
+			<string>keyword</string>
+			<key>name</key>
+			<string>false</string>
+			<key>text</key>
+			<string>false</string>
+			<key>display</key>
+			<string>false</string>
+			<key>backuplength</key>
+			<integer>0</integer>
+			<key>leadingspace</key>
+			<true/>
+			<key>trailingspace</key>
+			<true/>
+			<key>startingposition</key>
+			<string>background</string>
+			<key>imagename</key>
+			<string>false</string>
+			<key>currentposition</key>
+			<string>background</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

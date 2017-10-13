@@ -48,12 +48,73 @@ class KeyboardViewController: UIInputViewController {
         // Add custom view sizing constraints here
     }
     
+    func importButtonData() {
+        print("Starting loadData()")
+        if let path = Bundle.main.path(forResource:"buttons", ofType: "plist"){
+            let dict:NSDictionary = NSDictionary(contentsOfFile: path)!
+            if (dict.object(forKey: "buttons") != nil) {
+                if let buttonDict:[String : Any] = dict.object(forKey: "buttons") as? [String : Any] {
+                    for (key, value) in buttonDict {
+                        print("Working: \(key)")
+                        if let buttonData:[String : Any] = value as? [String : Any] {
+                            var btnLeadingSpace:Bool!
+                            var btnName:String!
+                            var btnDisplay:String!
+                            var btnImageName:String!
+                            var btnText:String!
+                            var btnCurrentPosition:String!
+                            var btnbackupLength:Int = 0
+                            var btnHasTrailingSpace:Bool = false
+                            var btnType:String!
+                            var btnStartingPosition:String!
+                            for (key, value) in buttonData {
+                                print("Key = \(key) Value = \(value)")
+                                switch key {
+                                case "leadingspace":
+                                   btnLeadingSpace = value as! Bool
+                                case "name":
+                                   btnName = value as! String
+                                case "display":
+                                   btnDisplay = value as! String
+                                case "imagename":
+                                    btnImageName = value as! String
+                                case "text":
+                                    btnText =  value as! String
+                                case "currentposition":
+                                    btnCurrentPosition = value as! String
+                                case "backuplength":
+                                    btnbackupLength = value as! Int
+                                case "trailingspace":
+                                    btnHasTrailingSpace = value as! Bool
+                                case "type":
+                                    btnType = value as! String
+                                case "startingposition":
+                                    btnStartingPosition = value as! String
+                                default: break
+                                    
+                                }//end switch
+                            }//end for loop on buttonData
+                            makeHotButton(leadingSpace: btnLeadingSpace, name: btnName, display: btnDisplay, imageName: btnImageName, text: btnText, currentPosition: btnCurrentPosition, backupLength: btnbackupLength, hasTrailingSpace: btnHasTrailingSpace, type: btnType, startingPosition: btnStartingPosition )
+                        }//end buttonData
+                    
+                    }
+                }
+            }
+            
+        }
+        
+    }
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         let viewBgColor: UIColor = UIColor(red: 63/255, green: 64/255, blue: 68/255, alpha: 1)
         let swipeBgColor: UIColor = UIColor(red: 41/255, green: 43/255, blue: 53/255, alpha: 1)
-        
+        //this will be where we load all the buttons
+        importButtonData()
+       
         //MARK: ===> Swipe Stack View
         /*The trick here is to get a background color for a UIStackView you need to:
          1. Create a UIView
@@ -109,19 +170,19 @@ class KeyboardViewController: UIInputViewController {
         self.view.backgroundColor = viewBgColor
         
         //MARK: ====> HOT Buttons
-        bracesHotButton = makeHotButton(title: "{}", desc: "Insert left and right Braces place cursor in the middle")
-        bracketsHotButton = makeHotButton(title: "[]", desc: "Insert left and right Brackets place cursor in the middle")
-        self.varHotButton = makeHotButton(title: "var", desc: "Insert var keyword place cursor after the word var")
-        self.letHotButton = makeHotButton(title: "let", desc: "Insert let keyword place cursor after the word let")
-        self.quoteHotButton = makeHotButton(title: "\"\"", desc: "Insert left and right quotes place cursor in the middle")
-        self.codeHotButton = makeHotButton(title: "code", desc: "Insert code keyword place cursor after the word code")
-        self.codeHotButton = makeHotButton(title: "func", desc: "Insert the keyword func")
-        self.codeHotButton = makeHotButton(title: "enum", desc: "Insert the keyword enum")
-        self.codeHotButton = makeHotButton(title: "return", desc: "Insert the keyword return")
-        self.codeHotButton = makeHotButton(title: "struct", desc: "Insert the keyword struct")
-        self.codeHotButton = makeHotButton(title: "class", desc: "Insert the keyword class")
-        self.codeHotButton = makeHotButton(title: "weak", desc: "Insert the keyword weak")
-        self.codeHotButton = makeHotButton(title: "bool", desc: "Insert the keyword bool")
+//        self.bracesHotButton = makeHotButton(title: "{}", desc: "Insert left and right Braces place cursor in the middle")
+//        self.bracketsHotButton = makeHotButton(title: "[]", desc: "Insert left and right Brackets place cursor in the middle")
+//        self.varHotButton = makeHotButton(title: "var", desc: "Insert var keyword place cursor after the word var")
+//        self.letHotButton = makeHotButton(title: "let", desc: "Insert let keyword place cursor after the word let")
+//        self.quoteHotButton = makeHotButton(title: "\"\"", desc: "Insert left and right quotes place cursor in the middle")
+//        self.codeHotButton = makeHotButton(title: "code", desc: "Insert code keyword place cursor after the word code")
+//        self.codeHotButton = makeHotButton(title: "func", desc: "Insert the keyword func")
+//        self.codeHotButton = makeHotButton(title: "enum", desc: "Insert the keyword enum")
+//        self.codeHotButton = makeHotButton(title: "return", desc: "Insert the keyword return")
+//        self.codeHotButton = makeHotButton(title: "struct", desc: "Insert the keyword struct")
+//        self.codeHotButton = makeHotButton(title: "class", desc: "Insert the keyword class")
+//        self.codeHotButton = makeHotButton(title: "weak", desc: "Insert the keyword weak")
+//        self.codeHotButton = makeHotButton(title: "bool", desc: "Insert the keyword bool")
         
         //MARK: ====> THE STACK VIEW
         horizHotStackView = UIStackView(arrangedSubviews: arrayOfHotButtons)
@@ -199,38 +260,18 @@ class KeyboardViewController: UIInputViewController {
     
     
     //makeHotButton is meant to create a new UIButton for our HotButtons array then add them to the array
-    func makeHotButton(title: String, desc: String) -> UIButton{
+    func makeHotButton(leadingSpace: Bool, name:String, display: String, imageName: String, text: String, currentPosition: String, backupLength: Int, hasTrailingSpace: Bool, type: String, startingPosition: String ){
         let button = UIButton(type: .system)
-        var buttonBgColor: UIColor = UIColor(red: 41/255, green: 43/255, blue: 53/255, alpha: 1)
-        var hotButtonTextColor = UIColor.white
-        //button.setTitle(NSLocalizedString(title, comment: desc), for: [])
+        let image = UIImage(named: imageName)
+        button.setBackgroundImage(image, for: [])
         button.sizeToFit()
-        button.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 16)!
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.tag = arrayOfHotButtons.count
         button.addTarget(self, action: #selector(hotAction), for: UIControlEvents.touchUpInside)
         button.layer.zPosition = 2
         button.layer.cornerRadius = 4
         //button.layer.borderWidth = 1
-        button.layer.backgroundColor = buttonBgColor.cgColor
-        switch title {
-        case "var","let","func","enum","return","struct","class","weak","bool","code":
-            hotButtonTextColor = UIColor(red: 240/255, green: 53/255, blue: 253/255, alpha: 1)
-        case "\"\"":
-            hotButtonTextColor = UIColor(red: 255/255, green: 1/255, blue: 1/255, alpha: 1)
-        case "[]":
-            button.setBackgroundImage(UIImage(named: "brackets"), for: [])
-            hotButtonTextColor = UIColor.white
-        case "{}":
-            button.setBackgroundImage(UIImage(named: "curlybrackets"), for: [])
-            hotButtonTextColor = UIColor.white
-        default:
-            hotButtonTextColor = UIColor.white
-        }
         
-        button.setTitleColor(hotButtonTextColor, for:[])
         arrayOfHotButtons += [button]
-        return button
     }
     
     //MARK: ===> Hot Button Action Function
