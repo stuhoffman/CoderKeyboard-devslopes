@@ -12,9 +12,9 @@ import AudioToolbox
 class KeyboardViewController: UIInputViewController {
 //MARK: =====> OUTLETS
     @IBOutlet var nextKeyboardButton: UIButton!
-    
+    @IBOutlet var bracesHotButton: UIButton!
     //MARK: ====> Vars
-    var bracesHotButton: UIButton!
+//    var bracesHotButton: UIButton!
     var bracketsHotButton: UIButton!
     var varHotButton: UIButton!
     var letHotButton: UIButton!
@@ -109,8 +109,8 @@ class KeyboardViewController: UIInputViewController {
         self.view.backgroundColor = viewBgColor
         
         //MARK: ====> HOT Buttons
-        self.bracesHotButton = makeHotButton(title: "{}", desc: "Insert left and right Braces place cursor in the middle")
-        self.bracketsHotButton = makeHotButton(title: "[]", desc: "Insert left and right Brackets place cursor in the middle")
+        bracesHotButton = makeHotButton(title: "{}", desc: "Insert left and right Braces place cursor in the middle")
+        bracketsHotButton = makeHotButton(title: "[]", desc: "Insert left and right Brackets place cursor in the middle")
         self.varHotButton = makeHotButton(title: "var", desc: "Insert var keyword place cursor after the word var")
         self.letHotButton = makeHotButton(title: "let", desc: "Insert let keyword place cursor after the word let")
         self.quoteHotButton = makeHotButton(title: "\"\"", desc: "Insert left and right quotes place cursor in the middle")
@@ -194,17 +194,16 @@ class KeyboardViewController: UIInputViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
+ 
     }
     
     
     //makeHotButton is meant to create a new UIButton for our HotButtons array then add them to the array
     func makeHotButton(title: String, desc: String) -> UIButton{
         let button = UIButton(type: .system)
-        let buttonBgColor: UIColor = UIColor(red: 41/255, green: 43/255, blue: 53/255, alpha: 1)
+        var buttonBgColor: UIColor = UIColor(red: 41/255, green: 43/255, blue: 53/255, alpha: 1)
         var hotButtonTextColor = UIColor.white
-        button.setTitle(NSLocalizedString(title, comment: desc), for: [])
+        //button.setTitle(NSLocalizedString(title, comment: desc), for: [])
         button.sizeToFit()
         button.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 16)!
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -212,14 +211,18 @@ class KeyboardViewController: UIInputViewController {
         button.addTarget(self, action: #selector(hotAction), for: UIControlEvents.touchUpInside)
         button.layer.zPosition = 2
         button.layer.cornerRadius = 4
-        button.layer.borderWidth = 1
+        //button.layer.borderWidth = 1
         button.layer.backgroundColor = buttonBgColor.cgColor
         switch title {
         case "var","let","func","enum","return","struct","class","weak","bool","code":
             hotButtonTextColor = UIColor(red: 240/255, green: 53/255, blue: 253/255, alpha: 1)
         case "\"\"":
             hotButtonTextColor = UIColor(red: 255/255, green: 1/255, blue: 1/255, alpha: 1)
-        case "{}","[]":
+        case "[]":
+            button.setBackgroundImage(UIImage(named: "brackets"), for: [])
+            hotButtonTextColor = UIColor.white
+        case "{}":
+            button.setBackgroundImage(UIImage(named: "curlybrackets"), for: [])
             hotButtonTextColor = UIColor.white
         default:
             hotButtonTextColor = UIColor.white

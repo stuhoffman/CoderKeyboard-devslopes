@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>buttonArray</key>
+	<array>
+		<dict>
+			<key>type</key>
+			<string>insert between</string>
+			<key>name</key>
+			<string>brackets</string>
+			<key>text</key>
+			<string>[ ]</string>
+			<key>display</key>
+			<string>[]</string>
+			<key>backuplength</key>
+			<integer>-1</integer>
+			<key>leadingspace</key>
+			<false/>
+			<key>trailingspace</key>
+			<false/>
+			<key>startingposition</key>
+			<string>hotbar</string>
+			<key>imagename</key>
+			<string>brackets</string>
+			<key>currentposition</key>
+			<string>hotbar</string>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>insert between</string>
+			<key>name</key>
+			<string>curlybrackets</string>
+			<key>text</key>
+			<string>{ }</string>
+			<key>display</key>
+			<string>{}</string>
+			<key>backuplength</key>
+			<integer>-1</integer>
+			<key>leadingspace</key>
+			<false/>
+			<key>trailingspace</key>
+			<false/>
+			<key>startingposition</key>
+			<string>hotbar</string>
+			<key>imagename</key>
+			<string>curlybrackets</string>
+			<key>currentposition</key>
+			<string>hotbar</string>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>insert between</string>
+			<key>name</key>
+			<string>function</string>
+			<key>text</key>
+			<string>(){}</string>
+			<key>display</key>
+			<string>(){\r\n}</string>
+			<key>backuplength</key>
+			<integer>-6</integer>
+			<key>leadingspace</key>
+			<false/>
+			<key>trailingspace</key>
+			<false/>
+			<key>startingposition</key>
+			<string>hotbar</string>
+			<key>imagename</key>
+			<string>function</string>
+			<key>currentposition</key>
+			<string>hotbar</string>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>insert between</string>
+			<key>name</key>
+			<string>lessgreaterthan</string>
+			<key>text</key>
+			<string>$lt$gt</string>
+			<key>display</key>
+			<string>$lt$gt</string>
+			<key>backuplength</key>
+			<integer>-1</integer>
+			<key>leadingspace</key>
+			<true/>
+			<key>trailingspace</key>
+			<true/>
+			<key>startingposition</key>
+			<string>hotbar</string>
+			<key>imagename</key>
+			<string>lessgreaterthan</string>
+			<key>currentposition</key>
+			<string>hotbar</string>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>insert between</string>
+			<key>name</key>
+			<string>parenthesis</string>
+			<key>text</key>
+			<string>( )</string>
+			<key>display</key>
+			<string>()</string>
+			<key>backuplength</key>
+			<integer>-1</integer>
+			<key>leadingspace</key>
+			<false/>
+			<key>trailingspace</key>
+			<false/>
+			<key>startingposition</key>
+			<string>hotbar</string>
+			<key>imagename</key>
+			<string>parenthesis</string>
+			<key>currentposition</key>
+			<string>hotbar</string>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>insert between</string>
+			<key>name</key>
+			<string>quotes</string>
+			<key>text</key>
+			<string>&quot; &quot;</string>
+			<key>display</key>
+			<string>\&quot;\&quot;</string>
+			<key>backuplength</key>
+			<integer>-1</integer>
+			<key>leadingspace</key>
+			<false/>
+			<key>trailingspace</key>
+			<false/>
+			<key>startingposition</key>
+			<string>hotbar</string>
+			<key>imagename</key>
+			<string>quotes</string>
+			<key>currentposition</key>
+			<string>hotbar</string>
+		</dict>
+	</array>
+</dict>
+</plist>

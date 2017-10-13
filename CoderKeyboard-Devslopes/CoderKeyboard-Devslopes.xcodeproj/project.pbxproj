@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		203CD1E01F9043EF001C920B /* Keyboard.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 203CD1DF1F9043EF001C920B /* Keyboard.xcassets */; };
+		203CD1E21F904924001C920B /* buttons.plist in Resources */ = {isa = PBXBuildFile; fileRef = 203CD1E11F904924001C920B /* buttons.plist */; };
 		20E5DC451F86707F00C1BC78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E5DC441F86707F00C1BC78 /* AppDelegate.swift */; };
 		20E5DC471F86707F00C1BC78 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E5DC461F86707F00C1BC78 /* ViewController.swift */; };
 		20E5DC4A1F86707F00C1BC78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20E5DC481F86707F00C1BC78 /* Main.storyboard */; };
@@ -45,6 +47,8 @@
 /* Begin PBXFileReference section */
 		201E62351F89C93300950112 /* CoderKeyboard-Devslopes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CoderKeyboard-Devslopes.entitlements"; sourceTree = "<group>"; };
 		201E62361F89C99A00950112 /* CoderKeyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoderKeyboard.entitlements; sourceTree = "<group>"; };
+		203CD1DF1F9043EF001C920B /* Keyboard.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Keyboard.xcassets; sourceTree = "<group>"; };
+		203CD1E11F904924001C920B /* buttons.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = buttons.plist; sourceTree = "<group>"; };
 		208BDA341F8A066900E326AD /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
 		20E5DC411F86707F00C1BC78 /* CoderKeyboard-Devslopes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoderKeyboard-Devslopes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20E5DC441F86707F00C1BC78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -123,6 +127,8 @@
 				201E62361F89C99A00950112 /* CoderKeyboard.entitlements */,
 				20E5DC5C1F867AE500C1BC78 /* KeyboardViewController.swift */,
 				20E5DC5E1F867AE500C1BC78 /* Info.plist */,
+				203CD1DF1F9043EF001C920B /* Keyboard.xcassets */,
+				203CD1E11F904924001C920B /* buttons.plist */,
 			);
 			path = CoderKeyboard;
 			sourceTree = "<group>";
@@ -231,6 +237,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				203CD1E01F9043EF001C920B /* Keyboard.xcassets in Resources */,
+				203CD1E21F904924001C920B /* buttons.plist in Resources */,
 				20E612DE1F8B3737006D0EC7 /* Montserrat-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
